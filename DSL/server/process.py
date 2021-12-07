@@ -1,9 +1,10 @@
 import multiprocessing
-import os
+import argparse
 
 class DslProcess(multiprocessing.Process):
-    def __init__(self):
-        super()
+    def __init__(self, username):
+        super().__init__()
+        self.username = username
 
 
     def step():

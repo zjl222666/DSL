@@ -10,9 +10,9 @@ class Standardization:
             - 错误处理
             - 语句规范化输出
     '''
-    key_word = ['step', 'over', 'goto', 'speak', 'set', 'listen', 'execute']
+    key_word = ['step', 'stepover', 'goto', 'speak', 'set', 'listen', 'execute']
 
-    
+
     def __init__(self) -> None:
         pass
         

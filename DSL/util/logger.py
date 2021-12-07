@@ -1,35 +1,39 @@
 import logging
-import os
 from DSL.setting import *
 
-user_logger = None
-core_logger = None
+user_logger = {}
+core_logger = {}
 
-def get_user_logger():
+def get_user_logger(file_name):
     global user_logger
-    id = os.getpid()
-    if user_logger is None:
+    if not file_name  in user_logger:
         logger = logging.getLogger()
         formatter = logging.Formatter('[%(asctime)s] %(message)s')
-        fh = logging.FileHandler("log_for_{}.txt".format(user_name))
+        
+        # 文件打印
+        fh = logging.FileHandler("{}.log".format(file_name))
         fh.setFormatter(formatter)
+
+        # 控制台打印
         sh = logging.StreamHandler()
         sh.setFormatter(formatter)
+
         logger.setLevel(user_logging_level)
         logger.addHandler(fh)
         logger.addHandler(sh)
-        user_logger = logger
-    return user_logger
+        user_logger[file_name] = logger
+    return user_logger[file_name]
 
-def get_core_logger():
+def get_core_logger(file_name):
     global core_logger
-    id = os.getpid()
-    if core_logger is None:
+    if not file_name in core_logger:
         logger = logging.getLogger()
+
         formatter = logging.Formatter('[%(asctime)s][%(filename)15s][%(levelname)8s] %(message)s')
-        fh = logging.FileHandler("log_for_core.txt")
+        # 文件输出
+        fh = logging.FileHandler("{}.log".format(file_name))
         fh.setFormatter(formatter)
         logger.setLevel(core_logging_level)
         logger.addHandler(fh)
-        user_logger = logger
-    return user_logger
+        user_logger[file_name] = logger
+    return user_logger[file_name]

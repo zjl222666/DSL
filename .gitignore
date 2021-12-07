@@ -1,10 +1,11 @@
 **pyc
 __pycache__/
-.ipynb_checkpoints/
 *.ipynb
 .vscode/
-gobigger.egg-info/
+DSL.egg-info/
 *.log
 .cache/
 **/build/
 *.mp4
+.pytest_cache/
+*.txt
