@@ -1,0 +1,4 @@
+[2021-12-07 16:53:58,102][test_inerpreter.py][   DEBUG] start test (parse_one_sentence)
+[2021-12-07 16:53:58,104][test_inerpreter.py][   DEBUG] step a : step\b[^0-9][a-z]+
+[2021-12-07 16:53:58,104][test_inerpreter.py][   DEBUG] step b : step\b[^0-9][a-z]+
+[2021-12-07 16:53:58,104][test_inerpreter.py][   DEBUG] step 1b : None
