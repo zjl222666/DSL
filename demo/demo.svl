@@ -1,0 +1,8 @@
+step thank
+    set $state "say_thank" when $state,"wait_for_thank"
+    speak $state
+step over
+
+step welcome
+
+step over

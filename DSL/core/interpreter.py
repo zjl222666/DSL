@@ -1,24 +1,24 @@
-import logging
-import re
+'''
+    运行:
 
-class Standardization:
-    '''
-    overview:
-        提供语句预处理功能，包括
-            - 词法分析
-            - 语法分析
-            - 错误处理
-            - 语句规范化输出
-    '''
-    key_word = ['step', 'stepover', 'goto', 'speak', 'set', 'listen', 'execute']
+'''
+
+from DSL.util.logger import get_core_logger, get_user_logger
 
 
-    def __init__(self) -> None:
-        pass
-        
-        
-    def parse(self, sentence):
-        pass
+user_logger = get_user_logger()
+core_logger = get_core_logger()
+
+
+def creat_step():
+    pass
+
+def setParameter():
+    pass
+
+def run():
+    pass
+
 
 
 class Interpreter:
@@ -26,19 +26,9 @@ class Interpreter:
     overview:
         解释器
     '''
-    RE = {
-        r'step\b[^0-9][a-z]+': 'creat_branch'
-    }
 
     def __init__(self) -> None:
         pass
 
     def parse_one_sentence(self, s):
-        for pattern, action in self.RE.items():
-            if re.match(pattern, s):
-                return action
-        
-
-
-
-
+        pass

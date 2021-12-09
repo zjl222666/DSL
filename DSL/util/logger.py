@@ -4,7 +4,7 @@ from DSL.setting import *
 user_logger = {}
 core_logger = {}
 
-def get_user_logger(file_name):
+def get_user_logger(file_name) -> logging.Logger:
     global user_logger
     if not file_name  in user_logger:
         logger = logging.getLogger()
@@ -24,7 +24,7 @@ def get_user_logger(file_name):
         user_logger[file_name] = logger
     return user_logger[file_name]
 
-def get_core_logger(file_name):
+def get_core_logger(file_name) -> logging.Logger:
     global core_logger
     if not file_name in core_logger:
         logger = logging.getLogger()
