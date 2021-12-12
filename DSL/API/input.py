@@ -13,7 +13,6 @@ setting:
     you can choose your input method in `setting.py`
 
 '''
-from DSL.setting import listen_method
 from DSL.util import logger
 from DSL.util.logger import get_user_logger
 
@@ -29,10 +28,5 @@ listen_dict = {
 }
 
 
-# Do not change the following
-def listen():
-    words =  listen_dict[listen_method]
-    logger = get_user_logger("conversation")
-    logger.info("User: {}".format(words))
-    return words
+
 

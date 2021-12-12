@@ -27,11 +27,14 @@ def is_end(s: str) -> bool:
     else: 
         return False
 
+def is_empty(s: str) -> bool:
+    return len(s) == 0
 
 Analyzer_dict = {
    "查询": is_query,
    "还款": is_repay,
-   "结束": is_end
+   "结束": is_end,
+   "沉默": is_empty
 }
 
 

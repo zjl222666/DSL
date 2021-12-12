@@ -7,11 +7,11 @@ core_logger = {}
 def get_user_logger(file_name) -> logging.Logger:
     global user_logger
     if not file_name  in user_logger:
-        logger = logging.getLogger()
+        logger = logging.getLogger("user"+file_name)
         formatter = logging.Formatter('[%(asctime)s] %(message)s')
         
         # 文件打印
-        fh = logging.FileHandler("{}.log".format(file_name))
+        fh = logging.FileHandler("log\\{}.log".format(file_name))
         fh.setFormatter(formatter)
 
         # 控制台打印
@@ -27,11 +27,11 @@ def get_user_logger(file_name) -> logging.Logger:
 def get_core_logger(file_name) -> logging.Logger:
     global core_logger
     if not file_name in core_logger:
-        logger = logging.getLogger()
+        logger = logging.getLogger("core"+file_name)
 
         formatter = logging.Formatter('[%(asctime)s][%(filename)15s][%(levelname)8s] %(message)s')
         # 文件输出
-        fh = logging.FileHandler("{}.log".format(file_name))
+        fh = logging.FileHandler("log\\{}.log".format(file_name))
         fh.setFormatter(formatter)
         logger.setLevel(core_logging_level)
         logger.addHandler(fh)

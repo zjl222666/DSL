@@ -1,0 +1,45 @@
+# image: "registry.sensetime.com/xlab/sensestar-docker:centos7"
+image: "registry.sensetime.com/docker.io/python:3.6"
+
+variables:
+  CI: "true"
+
+stages:
+  - install
+  - test
+  - doc
+
+install:
+  stage: install
+  script:
+    - pip install .
+
+coverage:
+  stage: test
+  script:
+    - apt-get update
+    - apt-get -y install libgl1-mesa-glx
+    - pip install .
+    - pip install coverage
+    - coverage run --source=. -m pytest
+    - coverage report -m
+    - coverage xml
+
+pages:
+  stage: doc
+  script:
+    - apt-get update
+    - apt-get -y install libgl1-mesa-glx
+    - pip install .
+    - export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
+    - echo $LD_LIBRARY_PATH
+    - pip install sphinx sphinx_rtd_theme sphinx-toolbox enum_tools
+    - make -C ./docs html
+    - mv docs/build/html public
+    - rm -rf docs/build
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+    - dev-0.1

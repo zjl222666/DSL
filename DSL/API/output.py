@@ -15,13 +15,11 @@ setting:
 from DSL.util.logger import get_user_logger
 
 def console(s):
-    return s
+    return True
 
 speak_dict = {
     "default":  console
 }
 
-def speak(s):
-    words = console(s)
-    logger = get_user_logger("conversation")
-    logger.info("server: {}".format(words))
+
+

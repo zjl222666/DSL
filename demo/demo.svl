@@ -1,8 +1,25 @@
-step thank
-    set $state "say_thank" when $state,"wait_for_thank"
-    speak $state
-step over
+step:thank
+    set: $state, "say_thank"
+    speak: $state
+stepover
 
-step welcome
+step:changename
+    listen: $name
 
-step over
+step:over
+    set: $name, "郑金亮"
+    speak: $name + ": goodbye" 
+stepover
+
+step: welcome
+    listen: $cur_listen
+    switch: $cur_listen
+        branch:  "thank", thank
+        branch:  "over", over
+        
+stepover
+
+listen: $begin_listen
+switch: $begin_listen
+    branch: "查询", welcome
+    branch: 
