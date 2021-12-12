@@ -23,5 +23,23 @@ class TestInterpreter:
             except:
                 self.i.core_logger.debug("failed")
 
-    def test_interprete(self):
-        pass
+    @pytest.mark.runner
+    def test_run(self):
+        commands = [
+            {'command': 'set',
+             'parameters': ['$a','"abc"'],
+             'trace': '0'},
+            {'command': 'speak',
+             'parameters': ['$a + "abc"'],
+             'trace': '1'},
+        ]
+        self.i.run(commands, "")
+
+
+
+if __name__ == '__main__':
+    path = "D:\homework\DSL\demo\demo1.svl"
+    f = open(path, encoding="utf-8")
+    codes = f.readlines()
+    i = Interpreter()
+    i.interpret(codes, path, "")

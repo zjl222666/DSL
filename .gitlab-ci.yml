@@ -1,6 +1,3 @@
-# image: "registry.sensetime.com/xlab/sensestar-docker:centos7"
-image: "registry.sensetime.com/docker.io/python:3.6"
-
 variables:
   CI: "true"
 

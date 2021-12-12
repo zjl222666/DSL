@@ -15,16 +15,13 @@ setup(
     packages=[
         'DSL',
         'DSL.core',
-        'DSL.data',
+        'DSL.API',
         'DSL.server',
         'DSL.util',
     ],
     install_requires=[
         'easydict',
         'pytest>=5.0.0',
-        # 'sphinx_toolbox',
-        'opencv-python',
-        'numpy>=1.10',
-        'matplotlib',
+        ''
     ]
 )

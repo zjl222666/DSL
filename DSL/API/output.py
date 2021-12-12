@@ -12,9 +12,11 @@ setting:
     you can choose your output method in `setting.py`
 
 '''
-from DSL.util.logger import get_user_logger
+from DSL.util.logger import get_core_logger
 
-def console(s):
+logger = get_core_logger('speak_test')
+def console(s, kwarg):
+    logger.debug(s)
     return True
 
 speak_dict = {

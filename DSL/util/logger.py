@@ -8,7 +8,7 @@ def get_user_logger(file_name) -> logging.Logger:
     global user_logger
     if not file_name  in user_logger:
         logger = logging.getLogger("user"+file_name)
-        formatter = logging.Formatter('[%(asctime)s] %(message)s')
+        formatter = logging.Formatter('[%(asctime)s][%(levelname)8s] %(message)s')
         
         # 文件打印
         fh = logging.FileHandler("log\\{}.log".format(file_name))

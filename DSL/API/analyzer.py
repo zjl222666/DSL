@@ -3,38 +3,35 @@ overview:
     define your Analyzer here
 
 rules: 
-    input: object need to analysed
+    input: 
+        - pattern: need 
+        - s:
+        - kwarg
     output: boolean
     note:    
         you need to make the analyzer correspond to a string one by one in dict `Analyzer_dict`:
 '''
+import re
 
-def is_query(s: str) -> bool:
-    if "查询" in s:
-        return True
-    else: 
-        return False
 
-def is_repay(s: str) -> bool:
-    if "还款" in s:
-        return True
-    else: 
-        return False
+def equal_analyzer(pattern : str, s: str, kwarg):
+    return pattern == s
 
-def is_end(s: str) -> bool:
-    if "结束" in s:
-        return True
-    else: 
-        return False
 
-def is_empty(s: str) -> bool:
-    return len(s) == 0
-
+def contain_analyzer(pattern :str, s: str, kwarg):
+    
+    if "len" in kwarg and pattern.isdigit():
+        return len(s) == int(pattern)
+    if pattern == "合法姓名":
+        p = r"^[a-z]*$"
+        if re.match(p, s):
+            return True
+        else:
+            return False
+    return pattern in s
 Analyzer_dict = {
-   "查询": is_query,
-   "还款": is_repay,
-   "结束": is_end,
-   "沉默": is_empty
+    "default": equal_analyzer,
+    "contain": contain_analyzer
 }
 
 
