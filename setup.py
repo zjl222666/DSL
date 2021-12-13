@@ -22,6 +22,6 @@ setup(
     install_requires=[
         'easydict',
         'pytest>=5.0.0',
-        ''
+        
     ]
 )

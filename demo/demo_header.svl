@@ -6,4 +6,5 @@ set:$goodbye,"再见！期待下一次为您服务"
 step: goodbye
     speak: $goodbye + "如果您有任何其他需要，请留言，我们后续将有人工为您解决问题"
     listen: $message
+stepover
 

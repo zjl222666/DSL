@@ -1,0 +1,61 @@
+import: D:\homework\DSL\demo\demo_header.svl
+
+step: over
+    speak: "非常抱歉，可能我们暂时无法解决您的问题，你可以进行留言，稍后将由人工为您服务"
+    listen: $message
+stepover
+
+step: query
+    speak: "查询功能升级中，抱歉，请稍后再试"
+    listen: $main_request
+    goto: service
+stepover
+
+step: repay
+    speak: "请您输入您的取款金额"
+    listen: $repay_num
+    speak: "稍后将有人工核对您的信息，成功取款后将以短信形式通知您"
+    listen: $main_request
+    goto: service
+stepover
+
+step: set_name
+    set: $name, $tmp_name
+    speak: "设置成功！" + $name + "已成为您的新姓名"
+    listen: $main_request
+    goto: service
+stepover
+
+step: jump_out
+    set: $main_request, $tmp_name
+    goto: service
+stepover
+
+step: change
+    speak: "请输入您的新名字"
+    listen: $tmp_name
+    switch: $tmp_name
+        branch: "合法姓名", set_name
+        branch: "其他需求", jump_out
+    speak: "非常抱歉，您输入的姓名不合法，请重试"
+    goto: change
+stepover
+
+step: service
+    switch: $main_request
+        branch: "查询", query
+        branch: "取款", repay
+        branch: "改名", change
+        branch: "结束", goodbye
+    set: $count, $count + "0"
+    switch: $count
+        branch: "5", over,len
+    speak: $again
+    listen: $main_request
+    goto: service
+stepover
+
+set: $count, ""
+speak: $name + "your phone number is" + $phone
+listen: $main_request
+goto: service   

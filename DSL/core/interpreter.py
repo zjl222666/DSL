@@ -52,7 +52,7 @@ class Interpreter:
                 if e[0] == '"':
                     result += e[1:-1]
                 else:
-                    result += self.var_cache[e]
+                    result += str(self.var_cache[e])
             return result
         except:
             raise_error("running error: ", "expression calculate failed", trace)

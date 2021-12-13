@@ -39,6 +39,7 @@ def clock_listen(kwargs):
     else:
         wait_time = 10
     global q, p
+    while not q.empty(): _ = q.get()
     if not isinstance(p, Thread) or not p.is_alive():
         if isinstance(p, Thread): p.join()
         p = Thread(target=wait_input, args=(q,))

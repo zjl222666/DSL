@@ -29,6 +29,8 @@ def contain_analyzer(pattern :str, s: str, kwarg):
         else:
             return False
     return pattern in s
+
+    
 Analyzer_dict = {
     "default": equal_analyzer,
     "contain": contain_analyzer

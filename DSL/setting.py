@@ -37,4 +37,7 @@ user_setting = 'input'
 '''
 user_num = 3
 
+# setting whether to save the var_cache to sqlite
+save_var = True
+
 

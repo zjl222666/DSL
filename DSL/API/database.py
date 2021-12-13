@@ -12,6 +12,24 @@ class userDatabase:
               '(' + header + ')'
         self.executer.execute(sql)
 
+    def result_save(self, table_name : str, dict : dict):
+        header = ' '.join(list(map(lambda x : x[1:]+" string,", dict.keys())))[:-1]
+        sql = 'drop table if exists ' + table_name
+        self.executer.execute(sql)
+
+        sql = 'create table ' + table_name + \
+              '(' + header + ')'
+        self.executer.execute(sql)
+        print(sql)
+
+        self.conn.commit()
+        sql = "insert into " + table_name  + ' values '
+        values = '(' +  ",".join(list(map(lambda x: '"'+ str(x)+ '"',dict.values()))) + ')'
+        sql += values
+        self.executer.execute(sql)
+
+        self.conn.commit()
+
     def insert_value(self, values) -> None:
         sql = "insert into " + database_table_name  + ' values '
         values = '(' +  ",".join(list(map(lambda x: '"'+ x+ '"',values))) + ')'
@@ -26,5 +44,5 @@ class userDatabase:
         ans = self.conn.execute(sql)
         for row in ans:
             for i, content in enumerate(row):
-                result[database_header[i]] = content
+                result['$' + database_header[i]] = content
         return result
