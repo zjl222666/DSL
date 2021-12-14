@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What is GoBigger? &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> DSL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../challenge/index.html">Challenge</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DSL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>What is GoBigger?</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/SerWise doc/what_is_gobigger.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="what-is-gobigger">
+<h1>What is GoBigger?<a class="headerlink" href="#what-is-gobigger" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>GoBigger is an <a class="reference external" href="https://agar.io/">Agar</a> like game, which is one of the most popular game all over the world. In GoBigger, users control their owned balls to collect weight in a 2-d map with border. There are many other balls in the map, such as food-balls, thorns-balls, spore-balls and other players’ balls. With the limited time, user are ranked by the weight they collect. In order to improve the antagonism of the game, users are allowed to eat other others’ balls to get more weight. So in a game, users need to grow by eating food-balls and thorns-balls, and escape from the larger balls, and eat smaller balls to gather more weight quickly.</p>
+<div class="figure align-center" id="id1">
+<a class="reference internal image-reference" href="../_images/overview.gif"><img alt="../_images/overview.gif" src="../_images/overview.gif" style="width: 600px;" /></a>
+<p class="caption"><span class="caption-text">Players are controling player-balls in a game.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
+</div>
+<p>For a more detailed exposition rules of the game, we will firstly introduce the balls in GoBigger.</p>
+</div>
+<div class="section" id="balls">
+<h2>Balls<a class="headerlink" href="#balls" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>Food-balls</p>
+<blockquote>
+<div><p>Food-balls are the neutral resources in the game. They will stay on where they are borned util someone comes and eats them. If a player-ball eat a food-ball, the food-ball’s size will be parsed to the player-ball. There is a maximum number of food-balls in the map. Once the number of available food-balls is not enough, the game will generate new food-balls in random positions every certain time.</p>
+<div class="figure align-center" id="id2">
+<a class="reference internal image-reference" href="../_images/eat_food.gif"><img alt="../_images/eat_food.gif" src="../_images/eat_food.gif" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">A player-balls eat a food-ball.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Thorns-balls</p>
+<blockquote>
+<div><p>Thorns-balls are also the neutral resources in the game. Different with food-balls, they have larger size and less quantity. If a player-ball eat a thorns-ball, the thorns-ball’s size will be parsed to the player-ball. But at the same time, the player-ball will explode and will be splited into several pieces. In GoBigger, the pieces always have the same size, and they will appear evenly around the original player-ball. So be careful! If there are other player-balls larger than yours, you should pay more attention to decide whether to eat the thorns-balls.</p>
+<p>Another feature of the thorns-balls is that they can be moved by player-balls through ejecting spore-balls. If a player-ball eject spore-balls to a thorns-ball, the thorns-ball will eat the spore-balls and grow larger. Besides, it will move on the moving direction of the spore-balls. That means if a player-ball wants to force a larger player-ball to explode, it can eject spore-balls to the thorns-ball and move it to the larger player-ball.</p>
+<div class="figure align-center" id="id3">
+<a class="reference internal image-reference" href="../_images/on_thorns.gif"><img alt="../_images/on_thorns.gif" src="../_images/on_thorns.gif" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">A player-balls eat a thorns-ball and explode.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Spore-balls</p>
+<blockquote>
+<div><p>Spore-balls are ejected by the player-balls. They will stay on the map and can be eaten by any other player-balls. Spore-balls can not move or eat others.</p>
+<div class="figure align-center" id="id4">
+<a class="reference internal image-reference" href="../_images/eject.gif"><img alt="../_images/eject.gif" src="../_images/eject.gif" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">A player-balls eject some spore-balls.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Player-balls</p>
+<blockquote>
+<div><p>Player-balls are the balls you can control in the game. You can change its moving direction at any time if you want. In addition, it can eat other balls smaller than itself by covering others’ center. Once a player-ball eat other balls, its size will raise and it radius will increase accordingly. A player-ball has there skills:</p>
+<div class="figure align-center" id="id5">
+<a class="reference internal image-reference" href="../_images/eat_player.gif"><img alt="../_images/eat_player.gif" src="../_images/eat_player.gif" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">A player-balls eat other player-balls.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
+</div>
+<ul>
+<li><p>Eject</p>
+<blockquote>
+<div><p>Ejecting a spore-ball can help a player-ball decrease its size and make it move faster. When a player-ball ejects, the new spore-ball must appear on the player-ball’s moving direction with a high speed and quickly slow down.</p>
+<div class="figure align-center" id="id6">
+<a class="reference internal image-reference" href="../_images/eject_to_thorns.gif"><img alt="../_images/eject_to_thorns.gif" src="../_images/eject_to_thorns.gif" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">A player-ball eject to a thorns-ball and move it.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Split</p>
+<blockquote>
+<div><p>Spliting helps a player-ball to split itself in two pieces. The two pieces has the same size. Remember that all pieces will be merged in certain time. If you want to move faster, you can split and turn your balls into smaller size in order to get higher speed limit.</p>
+<div class="figure align-center" id="id7">
+<a class="reference internal image-reference" href="../_images/split.gif"><img alt="../_images/split.gif" src="../_images/split.gif" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">A player-ball splits into two player-balls.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Stop</p>
+<blockquote>
+<div><p>Stopping is a useful skill when a player wants all his player-balls to gather together. When you have numbers of cloned pieces, you can stop all your balls and soonly find them gather in a slow speed. If you have only one player-ball, you can call stop skill and make your player-ball still in place.</p>
+<div class="figure align-center" id="id8">
+<a class="reference internal image-reference" href="../_images/split_merge.gif"><img alt="../_images/split_merge.gif" src="../_images/split_merge.gif" style="width: 300px;" /></a>
+<p class="caption"><span class="caption-text">A player stop and finally merge all balls together.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="rules-of-game">
+<h2>Rules of Game<a class="headerlink" href="#rules-of-game" title="Permalink to this headline">¶</a></h2>
+<p>There are a few rules to be aware of as following.</p>
+<ol class="arabic simple">
+<li><p>Player-balls have a decay on size to ensure that they will not grow too large. For example, we set <code class="docutils literal notranslate"><span class="pre">size_decay=0.00001</span></code> in our default setting, which means that a player-ball’s size will drop 0.001% in a state frame. Normaly we will have 40 state frames in a second, that means a player-ball’s size will drop 0.04% in a second. If your player-ball’s size is too large, you must eat more others to remain your size.</p></li>
+<li><p>If a player’s all balls are eat, it will respawn in somewhere randomly and immediately.</p></li>
+<li><p>The player’s vision will depends on its balls’ positions. We calculate the centroid of a player, and get the smallest external square of all balls. After that, we expand this square as the final vision. To guarantee each player’s vision, we also provide them with the basic vision even if all their balls gather together. For example, if the balls of a player are dispersed enough, a larger vision will be applied for this player.</p></li>
+<li><p>Each ball has its own speed limit based on its size. In order to ensure the balance of the game, we let larger balls move slow and smaller balls move fast.</p></li>
+</ol>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Start &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="What is GoBigger?" href="what_is_gobigger.html" />
+    <link rel="prev" title="SerWise文档" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> DSL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SerWise文档</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Quick Start</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#serwise">运行你的第一个Serwise脚本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customize-your-config">Customize your config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#add-more-players-in-a-game">Add more players in a game</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#extend-the-game-time">Extend the game time</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#change-the-size-of-the-map">Change the size of the map</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="what_is_gobigger.html">What is GoBigger?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="real_time_interaction_with_game.html">Real-time Interaction with game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="space.html">Space</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">开发者文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DSL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">SerWise文档</a> &raquo;</li>
+      <li>Quick Start</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/SerWise doc/quick_start.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="quick-start">
+<h1>Quick Start<a class="headerlink" href="#quick-start" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="serwise">
+<h2>运行你的第一个Serwise脚本<a class="headerlink" href="#serwise" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">demo.svl</span></code></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">set</span><span class="p">:</span> <span class="n">$welcome</span><span class="p">,</span> <span class="s">&quot;您好，欢迎使用SerWise&quot;</span>
+<span class="nl">listen</span><span class="p">:</span> <span class="n">$name</span>
+<span class="nl">speak</span><span class="p">:</span> <span class="n">$name</span> <span class="o">+</span> <span class="n">$welcome</span>
+</pre></div>
+</div>
+<p>以上是一个简单的Serwise脚本</p>
+</div>
+<div class="section" id="customize-your-config">
+<h2>Customize your config<a class="headerlink" href="#customize-your-config" title="Permalink to this headline">¶</a></h2>
+<p>Class <code class="docutils literal notranslate"><span class="pre">Server</span></code> use default config to generate a game environment. To customize your environment, you can change the parameters and parse them to <code class="docutils literal notranslate"><span class="pre">Server</span></code>.</p>
+<div class="section" id="add-more-players-in-a-game">
+<h3>Add more players in a game<a class="headerlink" href="#add-more-players-in-a-game" title="Permalink to this headline">¶</a></h3>
+<p>For example, you may want to allow 6 teams and 2 players per team in your game, and then please add <code class="docutils literal notranslate"><span class="pre">team_num</span></code> and <code class="docutils literal notranslate"><span class="pre">player_num_per_team</span></code> in config and parse it to <code class="docutils literal notranslate"><span class="pre">Server</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gobigger.server</span> <span class="kn">import</span> <span class="n">Server</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+    <span class="n">team_num</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span>
+    <span class="n">player_num_per_team</span><span class="o">=</span><span class="mi">2</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="extend-the-game-time">
+<h3>Extend the game time<a class="headerlink" href="#extend-the-game-time" title="Permalink to this headline">¶</a></h3>
+<p>If you want to extend the game time to 20 minutes (1200 seconds), you can use the following codes.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gobigger.server</span> <span class="kn">import</span> <span class="n">Server</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+    <span class="n">match_time</span><span class="o">=</span><span class="mi">1200</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="change-the-size-of-the-map">
+<h3>Change the size of the map<a class="headerlink" href="#change-the-size-of-the-map" title="Permalink to this headline">¶</a></h3>
+<p>If you want to have a larger map, you can change <code class="docutils literal notranslate"><span class="pre">map_width</span></code> and <code class="docutils literal notranslate"><span class="pre">map_height</span></code> in config.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gobigger.server</span> <span class="kn">import</span> <span class="n">Server</span>
+
+<span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span>
+    <span class="n">map_width</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+    <span class="n">map_height</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+<span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="SerWise文档" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="what_is_gobigger.html" class="btn btn-neutral float-right" title="What is GoBigger?" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

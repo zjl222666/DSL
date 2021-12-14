@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> DSL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SerWise%20doc/index.html">SerWise文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DSL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Submit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer/submit.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="submit">
+<h1>Submit<a class="headerlink" href="#submit" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Here in <code class="docutils literal notranslate"><span class="pre">gobigger/submit/</span></code>, we provide examples of submission for all teams in our challenge. We also provide basic code here, and participants should implements their owned submission based on the code.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">BaseSubmission</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">team_name</span><span class="p">,</span> <span class="n">player_names</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">team_name</span> <span class="o">=</span> <span class="n">team_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">player_names</span> <span class="o">=</span> <span class="n">player_names</span>
+
+    <span class="k">def</span> <span class="nf">get_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            You must implement this function.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span>
+</pre></div>
+</div>
+<p>Note that all submission should extend with <code class="docutils literal notranslate"><span class="pre">BaseSubmission</span></code>. We will provide <code class="docutils literal notranslate"><span class="pre">team_name</span></code> and <code class="docutils literal notranslate"><span class="pre">player_names</span></code> for each submission as their basic parameters. <code class="docutils literal notranslate"><span class="pre">team_names</span></code> means the name of team which this submission controls. We also know that there are several players in a team, which is relative with the <code class="docutils literal notranslate"><span class="pre">player_names</span></code> in the parameters. We will call <code class="docutils literal notranslate"><span class="pre">get_actions()</span></code> when we try to get actions from this submission. So that participants should implements <code class="docutils literal notranslate"><span class="pre">get_actions()</span></code> in their submission. This function will receive <code class="docutils literal notranslate"><span class="pre">obs</span></code> as its parameters, which is the same as what we provide in <code class="docutils literal notranslate"><span class="pre">tutorial</span></code>. For example, submissions will get <code class="docutils literal notranslate"><span class="pre">obs</span></code> as following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">global_state</span><span class="p">,</span> <span class="n">player_state</span> <span class="o">=</span> <span class="n">obs</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">global_state</span></code> in details:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;border&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">map_width</span><span class="p">,</span> <span class="n">map_height</span><span class="p">],</span> <span class="c1"># the map size</span>
+    <span class="s1">&#39;total_time&#39;</span><span class="p">:</span> <span class="n">match_time</span><span class="p">,</span> <span class="c1"># the duration of a game</span>
+    <span class="s1">&#39;last_time&#39;</span><span class="p">:</span> <span class="n">last_time</span><span class="p">,</span>   <span class="c1"># the length of time a game has been played</span>
+    <span class="s1">&#39;leaderboard&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">team_name</span><span class="p">:</span> <span class="n">team_size</span>
+    <span class="p">}</span> <span class="c1"># the team with its size in this game</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Participants can find their <code class="docutils literal notranslate"><span class="pre">team_name</span></code> in submission matched with the <code class="docutils literal notranslate"><span class="pre">team_name</span></code> in <code class="docutils literal notranslate"><span class="pre">leaderboard</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">player_state</span></code> in details:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">player_name</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;rgb&#39;</span><span class="p">:</span> <span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="c1"># vision of this player</span>
+        <span class="s1">&#39;feature_layers&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span> <span class="c1"># features of player</span>
+        <span class="s1">&#39;rectangle&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">left_top_x</span><span class="p">,</span> <span class="n">left_top_y</span><span class="p">,</span> <span class="n">right_bottom_x</span><span class="p">,</span> <span class="n">right_bottom_y</span><span class="p">],</span> <span class="c1"># the vision&#39;s position in the map</span>
+        <span class="s1">&#39;overlap&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;food&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+            <span class="s1">&#39;thorns&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+            <span class="s1">&#39;spore&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+            <span class="s1">&#39;clone&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">,</span> <span class="s1">&#39;player&#39;</span><span class="p">:</span> <span class="n">player_name</span><span class="p">,</span> <span class="s1">&#39;team&#39;</span><span class="p">:</span> <span class="n">team_name</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+        <span class="p">},</span> <span class="c1"># all balls&#39; info in vision</span>
+        <span class="s1">&#39;team_name&#39;</span><span class="p">:</span> <span class="n">team_name</span><span class="p">,</span> <span class="c1"># the team which this player belongs to</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>However, we will only provide the submission with the <code class="docutils literal notranslate"><span class="pre">player_state</span></code> matched with its players. That means, if <code class="docutils literal notranslate"><span class="pre">player_a</span></code> and <code class="docutils literal notranslate"><span class="pre">player_b</span></code> (both are player name) are in the team belongs to this submission, and <code class="docutils literal notranslate"><span class="pre">player_c</span></code> not belongs to this team, participants will only get <code class="docutils literal notranslate"><span class="pre">player_a</span></code> and <code class="docutils literal notranslate"><span class="pre">player_b</span></code> in the submission.</p>
+<p>After getting the <code class="docutils literal notranslate"><span class="pre">obs</span></code>, submissions should return <code class="docutils literal notranslate"><span class="pre">actions</span></code> in <code class="docutils literal notranslate"><span class="pre">get_actions()</span></code>. <code class="docutils literal notranslate"><span class="pre">actions</span></code> should look like:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">player_a</span><span class="p">:</span> <span class="n">actions_a</span><span class="p">,</span>
+    <span class="n">player_b</span><span class="p">:</span> <span class="n">actions_b</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Remember that both <code class="docutils literal notranslate"><span class="pre">player_a</span></code> and <code class="docutils literal notranslate"><span class="pre">player_b</span></code> should be the name in your submission’s <code class="docutils literal notranslate"><span class="pre">player_names</span></code>. And <code class="docutils literal notranslate"><span class="pre">actions_a</span></code> should be a list, which contains there items, which are the same with what we propose in action space.</p>
+</div>
+<div class="section" id="examples-and-test">
+<h2>Examples and Test<a class="headerlink" href="#examples-and-test" title="Permalink to this headline">¶</a></h2>
+<p>We provide <code class="docutils literal notranslate"><span class="pre">RandomSubmission</span></code> and <code class="docutils literal notranslate"><span class="pre">BotSubmission</span></code> in <code class="docutils literal notranslate"><span class="pre">gobigger/submit/</span></code>. <code class="docutils literal notranslate"><span class="pre">RandomSubmission</span></code> provide actions randomly, and <code class="docutils literal notranslate"><span class="pre">BotSubmission</span></code> provide actions based on a script. Both of them could be an example of your submission. More details in code.</p>
+<p>We also provide an example for the pipeline of the submission. Please refer to <code class="docutils literal notranslate"><span class="pre">gobigger/submit/submission_example/</span></code> for more details. You can also develop your agent in this directory. Once you finish your <code class="docutils literal notranslate"><span class="pre">my_submission.py</span></code>, you can call <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-u</span> <span class="pre">test.py</span></code> to check your submission and finally get the <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file to upload.</p>
+</div>
+<div class="section" id="supplements">
+<h2>Supplements<a class="headerlink" href="#supplements" title="Permalink to this headline">¶</a></h2>
+<p>If you want to add other things in your submission, such as model checkpoints or any other materials, please place them in <code class="docutils literal notranslate"><span class="pre">./supplements</span></code> and tar them with submission.</p>
+</div>
+<div class="section" id="finally">
+<h2>Finally<a class="headerlink" href="#finally" title="Permalink to this headline">¶</a></h2>
+<p>You should place all your code and materials under <code class="docutils literal notranslate"><span class="pre">my_submission/</span></code>. Use <code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">zcf</span> <span class="pre">submission.tar.gz</span> <span class="pre">my_submission/</span></code> to get your final submission files. The final <code class="docutils literal notranslate"><span class="pre">submission.tar.gz</span></code> should be:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">-</span> <span class="n">my_submission</span>
+<span class="o">|</span> <span class="o">-</span> <span class="fm">__init__</span><span class="o">.</span><span class="n">py</span>
+<span class="o">|</span> <span class="o">-</span> <span class="n">my_submission</span><span class="o">.</span><span class="n">py</span>
+<span class="o">|</span> <span class="o">-</span> <span class="n">supplements</span><span class="o">/</span>
+    <span class="o">|</span> <span class="o">-</span> <span class="n">checkpoints</span> <span class="ow">or</span> <span class="n">other</span> <span class="n">materials</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> should be an empty file.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

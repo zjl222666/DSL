@@ -2,7 +2,7 @@
 __pycache__/
 *.ipynb
 .vscode/
-DSL.egg-info/
+*.egg-info/
 *.log
 .cache/
 **/build/

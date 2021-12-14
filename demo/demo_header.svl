@@ -1,7 +1,7 @@
 set:$welcome,"您好,请问有什么可以为您服务的"
 set:$again,"不好意思，我没有听清，您可以再说一次嘛"
 set:$query_name,"请告诉我您的名字"
-set:$goodbye,"再见！期待下一次为您服务"
+set:$goodbye,"再见! 期待下一次为您服务"
 
 step: goodbye
     speak: $goodbye + "如果您有任何其他需要，请留言，我们后续将有人工为您解决问题"

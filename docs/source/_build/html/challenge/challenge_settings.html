@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Challenge Settings &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="League" href="league.html" />
+    <link rel="prev" title="Challenge" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> DSL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Challenge</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Challenge Settings</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#basic-game-settings">Basic Game Settings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#more-game-settings">More Game Settings</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#food">Food</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#thorns">Thorns</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#clone">Clone</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spore">Spore</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="league.html">League</a></li>
+<li class="toctree-l2"><a class="reference internal" href="submit.html">Submit</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DSL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Challenge</a> &raquo;</li>
+      <li>Challenge Settings</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/challenge/challenge_settings.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="challenge-settings">
+<h1>Challenge Settings<a class="headerlink" href="#challenge-settings" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="basic-game-settings">
+<h2>Basic Game Settings<a class="headerlink" href="#basic-game-settings" title="Permalink to this headline">¶</a></h2>
+<p>In this challenge, your agent control your team against other 3 teams and your goal is to eat and go bigger than others. There are a few points to note:</p>
+<ol class="arabic simple">
+<li><p>Each game will last ten minutes (3000 steps).</p></li>
+<li><p>The map size will be 1000 * 1000.</p></li>
+<li><p>The game mode is FFA (Free For All), which means that everyone may take part in a game.</p></li>
+<li><p>Usually there are 3 players in a team, and your agent need to control all 3 players in your team. That means teamwork is important in this challenge if you want to get a higher score.</p></li>
+<li><p>We will maintain a league system to score each agent in this challenge.</p></li>
+</ol>
+</div>
+<div class="section" id="more-game-settings">
+<h2>More Game Settings<a class="headerlink" href="#more-game-settings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="food">
+<h3>Food<a class="headerlink" href="#food" title="Permalink to this headline">¶</a></h3>
+<p>At the beginning of the challenge, there will be 2000 food balls in the map. We will replenish 30 food balls every 2 seconds until the number of food balls reach the upper limit, which is set 2500. Each food ball will be a circle with radius 2, and a food ball will remain in our map until someone eat it.</p>
+</div>
+<div class="section" id="thorns">
+<h3>Thorns<a class="headerlink" href="#thorns" title="Permalink to this headline">¶</a></h3>
+<p>Same as food balls, 15 thorns balls will be initialized in the map. And we will add two more thorns balls each 2 seconds. Make sure that the number of thorns balls will not greater than 20, which is the upper limit in this challenge. The radius of each thorns ball will randomly decided from 12 to 20.</p>
+</div>
+<div class="section" id="clone">
+<h3>Clone<a class="headerlink" href="#clone" title="Permalink to this headline">¶</a></h3>
+<p>You should note that each team consists of 3 players, and each player can have a maximum of 16 clone balls. Each clone ball will have a maximum speed limit, which depends on it size. The larger balls move slower. We make sure that the radius of each clone ball will be 3 at least and 100 at most. When the radius of a clone ball is more than 10, it can split or eject. After split, a clone ball will enter a coll-down period (20 seconds), which means it can not merge with other clone ball until the period ends.</p>
+</div>
+<div class="section" id="spore">
+<h3>Spore<a class="headerlink" href="#spore" title="Permalink to this headline">¶</a></h3>
+<p>Spore balls can be eat by any other clone balls larger than itself. We make sure that all spore balls have the same radius of 3.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Challenge" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="league.html" class="btn btn-neutral float-right" title="League" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
