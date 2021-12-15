@@ -4,8 +4,8 @@ overview:
 
 rules: 
     input: 
-        - pattern: need 
-        - s:
+        - pattern
+        - s
         - kwarg
     output: boolean
     note:    

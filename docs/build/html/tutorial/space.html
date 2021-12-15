@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Space &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Challenge" href="../challenge/index.html" />
+    <link rel="prev" title="Real-time Interaction with game" href="real_time_interaction_with_game.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> DSL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="what_is_gobigger.html">What is GoBigger?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="real_time_interaction_with_game.html">Real-time Interaction with game</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Space</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#action-space">Action Space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#observation-space">Observation Space</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#observation-space-without-feature-layers">Observation Space - Without Feature Layers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../challenge/index.html">Challenge</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DSL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+      <li>Space</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/space.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="space">
+<h1>Space<a class="headerlink" href="#space" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="action-space">
+<h2>Action Space<a class="headerlink" href="#action-space" title="Permalink to this headline">¶</a></h2>
+<p>In fact, a ball can only move, eject, split, and stop in our game, thus the action space is simple:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">action</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">action_type</span><span class="p">]</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>x, y: A point <code class="docutils literal notranslate"><span class="pre">(x,</span> <span class="pre">y)</span></code> in the unit circle.</dt><dd><ul>
+<li><p>We will normalize this point to ensure that its length will not more than 1.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>action_type: Int</dt><dd><ul>
+<li><p>-1 means no actions</p></li>
+<li><p>0 means eject spore on your moving direction</p></li>
+<li><p>1 means split into several balls</p></li>
+<li><p>2 means stop and gather all your balls together</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>If you have several players in your game, remember that server needs to know the relationship between the actions and the players. So you need to send actions in the following way:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">player_names</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">get_player_names</span><span class="p">()</span> <span class="c1"># get all names in server</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="p">{</span><span class="n">player_name</span><span class="p">:</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">player_name</span> <span class="ow">in</span> <span class="n">player_names</span><span class="p">)}</span>
+<span class="n">server</span><span class="o">.</span><span class="n">step</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="observation-space">
+<h2>Observation Space<a class="headerlink" href="#observation-space" title="Permalink to this headline">¶</a></h2>
+<p>Each time <code class="docutils literal notranslate"><span class="pre">server.obs()</span></code> is called, you will get your balls’ observation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">global_state</span><span class="p">,</span> <span class="n">player_state</span> <span class="o">=</span> <span class="n">server</span><span class="o">.</span><span class="n">obs</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">global_state</span></code> in details:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;border&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">map_width</span><span class="p">,</span> <span class="n">map_height</span><span class="p">],</span> <span class="c1"># the map size</span>
+    <span class="s1">&#39;total_time&#39;</span><span class="p">:</span> <span class="n">match_time</span><span class="p">,</span> <span class="c1"># the duration of a game</span>
+    <span class="s1">&#39;last_time&#39;</span><span class="p">:</span> <span class="n">last_time</span><span class="p">,</span>   <span class="c1"># the length of time a game has been played</span>
+    <span class="s1">&#39;leaderboard&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="n">team_name</span><span class="p">:</span> <span class="n">team_size</span>
+    <span class="p">}</span> <span class="c1"># the team with its size in this game</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">player_state</span></code> in details:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">player_name</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;feature_layers&#39;</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">numpy</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span> <span class="c1"># features of player</span>
+        <span class="s1">&#39;rectangle&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">left_top_x</span><span class="p">,</span> <span class="n">left_top_y</span><span class="p">,</span> <span class="n">right_bottom_x</span><span class="p">,</span> <span class="n">right_bottom_y</span><span class="p">],</span> <span class="c1"># the vision&#39;s position in the map</span>
+        <span class="s1">&#39;overlap&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;food&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+            <span class="s1">&#39;thorns&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+            <span class="s1">&#39;spore&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+            <span class="s1">&#39;clone&#39;</span><span class="p">:</span> <span class="p">[{</span><span class="s1">&#39;position&#39;</span><span class="p">:</span> <span class="n">position</span><span class="p">,</span> <span class="s1">&#39;radius&#39;</span><span class="p">:</span> <span class="n">radius</span><span class="p">,</span> <span class="s1">&#39;player&#39;</span><span class="p">:</span> <span class="n">player_name</span><span class="p">,</span> <span class="s1">&#39;team&#39;</span><span class="p">:</span> <span class="n">team_name</span><span class="p">},</span> <span class="o">...</span><span class="p">],</span> <span class="c1"># the length of food is not sure</span>
+        <span class="p">},</span> <span class="c1"># all balls&#39; info in vision</span>
+        <span class="s1">&#39;team_name&#39;</span><span class="p">:</span> <span class="n">team_name</span><span class="p">,</span> <span class="c1"># the team which this player belongs to</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We define that <code class="docutils literal notranslate"><span class="pre">feature_layers</span></code> in <code class="docutils literal notranslate"><span class="pre">player_state</span></code> represents the feature of this player. <code class="docutils literal notranslate"><span class="pre">feature_layers</span></code> has several channels, and each channel gives the info of food balls, or spore balls, or thorns balls, or player balls in its vision. For example, in a game we have 4 teams and 3 players for each team, then we get <code class="docutils literal notranslate"><span class="pre">feature_layers</span></code> as a list, and the length of this list should be 15. Here we show the meanning of each channel in the list:</p>
+<ul class="simple">
+<li><p>channel 0: the position of player 0 in vision. If no player 0 in vision, all items will be zero.</p></li>
+<li><p>channel 1: the position of player 1 in vision.</p></li>
+<li><p>channel 2: the position of player 2 in vision.</p></li>
+<li><p>channel 3: the position of player 3 in vision.</p></li>
+<li><p>channel 4: the position of player 4 in vision.</p></li>
+<li><p>channel 5: the position of player 5 in vision.</p></li>
+<li><p>channel 6: the position of player 6 in vision.</p></li>
+<li><p>channel 7: the position of player 7 in vision.</p></li>
+<li><p>channel 8: the position of player 8 in vision.</p></li>
+<li><p>channel 9: the position of player 9 in vision.</p></li>
+<li><p>channel 10: the position of player 10 in vision.</p></li>
+<li><p>channel 11: the position of player 11 in vision.</p></li>
+<li><p>channel 12: the position of all food balls in vision.</p></li>
+<li><p>channel 13: the position of all spore balls in vision.</p></li>
+<li><p>channel 14: the position of all thorns balls in vision.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">overlap</span></code> in <code class="docutils literal notranslate"><span class="pre">player_state</span></code> only includes balls in the player’s owned vision. What’s more, if a ball only show part of itself in the player’s vision, we will return all this ball’s info, such as radius and position, to be part of <code class="docutils literal notranslate"><span class="pre">overlap</span></code>.</p>
+</div>
+</div>
+<div class="section" id="observation-space-without-feature-layers">
+<h2>Observation Space - Without Feature Layers<a class="headerlink" href="#observation-space-without-feature-layers" title="Permalink to this headline">¶</a></h2>
+<p>In fact, when we get <code class="docutils literal notranslate"><span class="pre">feature_layers</span></code> and <code class="docutils literal notranslate"><span class="pre">overlap</span></code> in observation, it is clear that they contains similar info but different in the form of expression. That means, we can only get <code class="docutils literal notranslate"><span class="pre">overlap</span></code> and drop <code class="docutils literal notranslate"><span class="pre">feature_layers</span></code> in our observation, which will bring us less computation because it reduces the amount of rendering calculations. You can add <code class="docutils literal notranslate"><span class="pre">use_spatial=False</span></code> when your render inits as following:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">server</span> <span class="o">=</span> <span class="n">Server</span><span class="p">()</span>
+<span class="n">render</span> <span class="o">=</span> <span class="n">EnvRender</span><span class="p">(</span><span class="n">server</span><span class="o">.</span><span class="n">map_width</span><span class="p">,</span> <span class="n">server</span><span class="o">.</span><span class="n">map_height</span><span class="p">,</span> <span class="n">use_spatial</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="c1"># drop feature_layers</span>
+<span class="n">server</span><span class="o">.</span><span class="n">set_render</span><span class="p">(</span><span class="n">render</span><span class="p">)</span>
+<span class="n">server</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you use <code class="docutils literal notranslate"><span class="pre">use_spatial=False</span></code> in your render, you will be unable to get the saved video because there will be no rendering in your environment simulation.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="real_time_interaction_with_game.html" class="btn btn-neutral float-left" title="Real-time Interaction with game" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../challenge/index.html" class="btn btn-neutral float-right" title="Challenge" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

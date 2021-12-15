@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>server &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>server &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -16,7 +16,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="utils" href="utils.html" />
-    <link rel="prev" title="render" href="render.html" /> 
+    <link rel="prev" title="core" href="core.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -24,7 +24,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> DSL
+            <a href="../index.html" class="icon icon-home"> SerWise
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -45,12 +45,9 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">API Doc</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="agents.html">agents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="balls.html">balls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="managers.html">managers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="players.html">players</a></li>
-<li class="toctree-l2"><a class="reference internal" href="render.html">render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">core</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">server</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#process">process</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id1">Server</a></li>
 </ul>
 </li>
@@ -68,7 +65,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DSL</a>
+          <a href="../index.html">SerWise</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -91,8 +88,77 @@
 <h1>server<a class="headerlink" href="#server" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
+<div class="section" id="process">
+<h2>process<a class="headerlink" href="#process" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="SerWise.server.process.DslProcess">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">SerWise.server.process.</span></code><code class="sig-name descname"><span class="pre">DslProcess</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">codes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/server/process.html#DslProcess"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.server.process.DslProcess" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Class used to create, manage, and run a customer service dialogue process</p>
+</dd>
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>id &lt;str&gt; : id for current process</p></li>
+<li><p>codes &lt;list[str]&gt; : script the process will run</p></li>
+<li><p>file &lt;str&gt; : the file path of script</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><p>None</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="SerWise.server.process.DslProcess.run">
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/server/process.html#DslProcess.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.server.process.DslProcess.run" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>the main step of a customer service dialogue process</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 <div class="section" id="id1">
 <h2>Server<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="SerWise.server.server.server">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">SerWise.server.server.</span></code><code class="sig-name descname"><span class="pre">server</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/server/server.html#server"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.server.server.server" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>The main class of the program, responsible for the scheduling and operation of the process and information feedback</p>
+</dd>
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>file_path &lt;str&gt;: the file path of the script will be run</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="SerWise.server.server.server.create_process">
+<code class="sig-name descname"><span class="pre">create_process</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/server/server.html#server.create_process"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.server.server.server.create_process" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Start a conversation process</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.server.server.server.main">
+<code class="sig-name descname"><span class="pre">main</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/server/server.html#server.main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.server.server.server.main" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>the main step of the server</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.server.server.server.print_state">
+<code class="sig-name descname"><span class="pre">print_state</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/server/server.html#server.print_state"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.server.server.server.print_state" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Print the current status of all processes</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -100,7 +166,7 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="render.html" class="btn btn-neutral float-left" title="render" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="core.html" class="btn btn-neutral float-left" title="core" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
         <a href="utils.html" class="btn btn-neutral float-right" title="utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 

@@ -5,33 +5,10 @@ utils
     :maxdepth: 2
 
 
-Border
+logger
 =======================
-.. autoclass:: gobigger.utils.structures.Border
-    :members:
+.. autoclass:: SerWise.util.logger.get_core_logger
 
 
-BaseCollisionDetection
-=========================================
-.. autoclass:: gobigger.utils.collision_detection.BaseCollisionDetection
-  :members:
+.. autoclass:: SerWise.util.logger.get_user_logger
 
-ExhaustiveCollisionDetection
-=========================================
-.. autoclass:: gobigger.utils.collision_detection.ExhaustiveCollisionDetection
-  :members:
-
-PrecisionCollisionDetection
-=========================================
-.. autoclass:: gobigger.utils.collision_detection.PrecisionCollisionDetection
-  :members:
-
-RebuildQuadTreeCollisionDetection
-=========================================
-.. autoclass:: gobigger.utils.collision_detection.RebuildQuadTreeCollisionDetection
-  :members:
-
-RemoveQuadTreeCollisionDetection
-=========================================
-.. autoclass:: gobigger.utils.collision_detection.RemoveQuadTreeCollisionDetection
-  :members:

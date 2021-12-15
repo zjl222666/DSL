@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Real-time Interaction with game &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Space" href="space.html" />
+    <link rel="prev" title="What is GoBigger?" href="what_is_gobigger.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> DSL
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Tutorial</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="what_is_gobigger.html">What is GoBigger?</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Real-time Interaction with game</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#single-player">Single Player</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#double-players">Double Players</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#single-players-with-partial-vision">Single Players with partial vision</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="space.html">Space</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../challenge/index.html">Challenge</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../api_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DSL</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Tutorial</a> &raquo;</li>
+      <li>Real-time Interaction with game</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/tutorial/real_time_interaction_with_game.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="real-time-interaction-with-game">
+<h1>Real-time Interaction with game<a class="headerlink" href="#real-time-interaction-with-game" title="Permalink to this headline">¶</a></h1>
+<p>GoBigger allow users to play game on their personal computer in real-time. Serveral modes are supported for users to explore this game.</p>
+<div class="section" id="single-player">
+<h2>Single Player<a class="headerlink" href="#single-player" title="Permalink to this headline">¶</a></h2>
+<p>If you want to play real-time game on your PC on your own, you can launch a game with the following code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m gobigger.bin.play --player-num <span class="m">1</span> --vision-type full
+</pre></div>
+</div>
+<p>In this mode, up arrow &amp; down arrow &amp; left arrow &amp; rigth arrow allows your balls move, <code class="docutils literal notranslate"><span class="pre">Q</span></code> means eject spore on your moving direction, <code class="docutils literal notranslate"><span class="pre">W</span></code> means split your balls, and <code class="docutils literal notranslate"><span class="pre">E</span></code> means stop all your balls and gather them together.</p>
+</div>
+<div class="section" id="double-players">
+<h2>Double Players<a class="headerlink" href="#double-players" title="Permalink to this headline">¶</a></h2>
+<p>If you want to play real-time game on your PC with your friends, you can launch a game with the following code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m gobigger.bin.play --player-num <span class="m">2</span> --vision-type full
+</pre></div>
+</div>
+<p>In this mode, player1 use up arrow &amp; down arrow &amp; left arrow &amp; rigth arrow allows the balls move, <code class="docutils literal notranslate"><span class="pre">[</span></code> means eject spore on your moving direction, <code class="docutils literal notranslate"><span class="pre">]</span></code> means split your balls, and <code class="docutils literal notranslate"><span class="pre">\\</span></code> means stop all your balls and gather them together. player2 use <code class="docutils literal notranslate"><span class="pre">W</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">S</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">A</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">D</span></code> allows the balls move, <code class="docutils literal notranslate"><span class="pre">1</span></code> means eject spore on your moving direction, <code class="docutils literal notranslate"><span class="pre">2</span></code> means split your balls, and <code class="docutils literal notranslate"><span class="pre">3</span></code> means stop all your balls and gather them together.</p>
+</div>
+<div class="section" id="single-players-with-partial-vision">
+<h2>Single Players with partial vision<a class="headerlink" href="#single-players-with-partial-vision" title="Permalink to this headline">¶</a></h2>
+<p>If you want to play real-time game on your PC with only partial vision, you can launch a game with the following code:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m gobigger.bin.play --player-num <span class="m">1</span> --vision-type partial
+</pre></div>
+</div>
+<p>Your vision depends on all your balls’ positions and their size.</p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="what_is_gobigger.html" class="btn btn-neutral float-left" title="What is GoBigger?" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="space.html" class="btn btn-neutral float-right" title="Space" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

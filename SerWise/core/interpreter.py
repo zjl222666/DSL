@@ -10,7 +10,7 @@ from SerWise.API.analyzer import Analyzer_dict
 class Interpreter:
     '''
     overview:
-        解释器
+        interpreter of serWise, it will interpret and execute each serwise statement that has been parsed
     '''
     core_logger = get_core_logger("interpreter_test")
     def __init__(self, id) -> None:
@@ -29,19 +29,25 @@ class Interpreter:
 
         self.cur_switch = []
         '''
-        note whether the running codes is in switch block and record the switch expr
+        a stack for labeling whether the running codes is in switch block and record the switch expr
         if not : (0,None)
         in but haven't go into any branch: (1,z)
         in and go into a branch: (2,z)        
         ''' 
+
         self.parser = Parser()
     
-    # Prepare for user information initialization
     def add_var(self, key, val):
+        '''
+        Prepare for user information initialization
+        '''
         self.var_cache[key] = val
 
-    # a hyper function to calculate the expression of string
+     
     def calculate_expr(self, expr: str, trace):
+        '''
+        a hyper function to calculate the expression of string
+        '''
         try:
             result = ""
             expr = expr.split('+')
@@ -59,6 +65,9 @@ class Interpreter:
             raise RuntimeError
     
     def fun_switch(self, parameters, trace):
+        '''
+        execute switch command
+        '''
         try:
             self.cur_switch[0] = [1, parameters[0]]
             return True
@@ -67,6 +76,9 @@ class Interpreter:
             return False
     
     def fun_speak(self, parameters, trace):
+        '''
+        execute speak command
+        '''
         try:
             speak_words = self.calculate_expr(parameters[0], trace)
             self.core_logger.debug(speak_words)
@@ -81,6 +93,9 @@ class Interpreter:
             return False
     
     def fun_branch(self, parameters, trace):
+        '''
+        execute branch command
+        '''
         try:
             if self.cur_switch[0][0] == 0:
                raise_error("compile error: ", "brach without switch", trace)
@@ -102,6 +117,9 @@ class Interpreter:
             return False
 
     def fun_goto(self, parameters, trace):
+        '''
+        execute goto command
+        '''
         try:
             target_step = parameters[0]
             if not target_step in self.step_cache:
@@ -109,10 +127,13 @@ class Interpreter:
                 return False
             return self.run(self.step_cache[target_step], trace)
         except:
-            raise_error("running error: ", "default command execute failed", trace)
+            raise_error("running error: ", "goto command execute failed", trace)
             return False
 
     def fun_listen(self, parameters, trace):
+        '''
+        execute listen command
+        '''
         try:
             key = parameters[0]
             words =  listen_dict[listen_method](parameters[1])
@@ -125,6 +146,9 @@ class Interpreter:
             return False
 
     def fun_set(self, parameters, trace):
+        '''
+        execute set command
+        '''
         try:
             key =  parameters[0]
             expr = self.calculate_expr(parameters[1], trace)
@@ -136,6 +160,9 @@ class Interpreter:
 
     
     def fun_import(self, parameters, trace):
+        '''
+        execute import command
+        '''
         try:
             file_path = parameters[0]
             f = open(file_path, encoding="utf-8")
@@ -148,6 +175,9 @@ class Interpreter:
             return False
 
     def run(self, commands, trace):
+        '''
+        execute command with hyper functions 
+        '''
         command_fun = {
             'speak': self.fun_speak,
             'listen': self.fun_listen,
@@ -157,6 +187,7 @@ class Interpreter:
             'set': self.fun_set,
             'goto': self.fun_goto
         }
+
         self.cur_switch.insert(0, [0,None])
         
         for command in commands:
@@ -171,7 +202,10 @@ class Interpreter:
         return True
 
     def interpret(self, codes : list, file: str, trace: str):
-        
+        '''
+        Overview:
+            the main step of interprete
+        '''
 
         cur_step = ""
         main = []

@@ -32,7 +32,8 @@ setup(
     entry_points = {
         'console_scripts': [
             'dslProcess = SerWise.server.process:main',
-            'serwise = SerWise.server.server.main'
+            'serwise = SerWise.server.server:main'
         ]
-    }
+    },
+
 )

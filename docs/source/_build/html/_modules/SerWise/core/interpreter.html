@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SerWise.core.interpreter &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> SerWise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/index.html">安装教程</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../SerWise%20doc/index.html">SerWise文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index.html">开发者文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SerWise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>SerWise.core.interpreter</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for SerWise.core.interpreter</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">SerWise.util.logger</span> <span class="kn">import</span> <span class="n">get_core_logger</span><span class="p">,</span> <span class="n">get_user_logger</span>
+<span class="kn">from</span> <span class="nn">SerWise.API.output</span> <span class="kn">import</span> <span class="n">speak_dict</span>
+<span class="kn">from</span> <span class="nn">SerWise.API.input</span> <span class="kn">import</span> <span class="n">listen_dict</span>
+<span class="kn">from</span> <span class="nn">SerWise.setting</span> <span class="kn">import</span> <span class="n">listen_method</span><span class="p">,</span> <span class="n">speak_method</span><span class="p">,</span> <span class="n">analyzer_chosen</span>
+<span class="kn">from</span> <span class="nn">SerWise.core.parser</span> <span class="kn">import</span> <span class="n">Parser</span>
+<span class="kn">from</span> <span class="nn">SerWise.util.error</span> <span class="kn">import</span> <span class="n">raise_error</span><span class="p">,</span> <span class="n">raise_warning</span>
+<span class="kn">from</span> <span class="nn">SerWise.API.analyzer</span> <span class="kn">import</span> <span class="n">Analyzer_dict</span>
+
+
+<div class="viewcode-block" id="Interpreter"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter">[docs]</a><span class="k">class</span> <span class="nc">Interpreter</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    overview:</span>
+<span class="sd">        interpreter of serWise, it will interpret and execute each serwise statement that has been parsed</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">core_logger</span> <span class="o">=</span> <span class="n">get_core_logger</span><span class="p">(</span><span class="s2">&quot;interpreter_test&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="nb">id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">step_cache</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        a dict to store the step</span>
+<span class="sd">            - key: step name</span>
+<span class="sd">            - value: command list</span>
+<span class="sd">                - command&lt;dict&gt;:</span>
+<span class="sd">                    -&#39;command&#39;: command name</span>
+<span class="sd">                    -&#39;parameters&#39;: parameters for command</span>
+<span class="sd">                    -&#39;trace&#39;: the command running trace</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        a stack for labeling whether the running codes is in switch block and record the switch expr</span>
+<span class="sd">        if not : (0,None)</span>
+<span class="sd">        in but haven&#39;t go into any branch: (1,z)</span>
+<span class="sd">        in and go into a branch: (2,z)        </span>
+<span class="sd">        &#39;&#39;&#39;</span> 
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">parser</span> <span class="o">=</span> <span class="n">Parser</span><span class="p">()</span>
+    
+<div class="viewcode-block" id="Interpreter.add_var"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.add_var">[docs]</a>    <span class="k">def</span> <span class="nf">add_var</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Prepare for user information initialization</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">var_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span></div>
+
+     
+<div class="viewcode-block" id="Interpreter.calculate_expr"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.calculate_expr">[docs]</a>    <span class="k">def</span> <span class="nf">calculate_expr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">expr</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        a hyper function to calculate the expression of string</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="n">expr</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;+&#39;</span><span class="p">)</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">strip</span><span class="p">(),</span> <span class="n">expr</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">core_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;calculate:  </span><span class="si">{</span><span class="n">expr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">expr</span><span class="p">:</span> 
+                <span class="k">if</span> <span class="n">e</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">+=</span> <span class="n">e</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">result</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">var_cache</span><span class="p">[</span><span class="n">e</span><span class="p">])</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;expression calculate failed&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span></div>
+    
+<div class="viewcode-block" id="Interpreter.fun_switch"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.fun_switch">[docs]</a>    <span class="k">def</span> <span class="nf">fun_switch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute switch command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;switch setting failed&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>      
+            <span class="k">return</span> <span class="kc">False</span></div>
+    
+<div class="viewcode-block" id="Interpreter.fun_speak"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.fun_speak">[docs]</a>    <span class="k">def</span> <span class="nf">fun_speak</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute speak command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">speak_words</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_expr</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">core_logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">speak_words</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">speak_dict</span><span class="p">[</span><span class="n">speak_method</span><span class="p">](</span><span class="n">speak_words</span><span class="p">,</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]):</span>
+                <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;speak method failed&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>  
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">logger</span> <span class="o">=</span> <span class="n">get_user_logger</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;conversation_for_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;server: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">speak_words</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;speak failed&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+    
+<div class="viewcode-block" id="Interpreter.fun_branch"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.fun_branch">[docs]</a>    <span class="k">def</span> <span class="nf">fun_branch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute branch command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+               <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;compile error: &quot;</span><span class="p">,</span> <span class="s2">&quot;brach without switch&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+               <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">cur_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_expr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="n">target_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_expr</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="n">target_step</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">Analyzer_dict</span><span class="p">[</span><span class="n">analyzer_chosen</span><span class="p">](</span><span class="n">target_str</span><span class="p">,</span> <span class="n">cur_str</span><span class="p">,</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">target_step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_cache</span><span class="p">:</span>
+                <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;unKown step&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            
+            <span class="k">if</span> <span class="n">flag</span><span class="p">:</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_cache</span><span class="p">[</span><span class="n">target_step</span><span class="p">],</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;branch command execute failed&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Interpreter.fun_goto"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.fun_goto">[docs]</a>    <span class="k">def</span> <span class="nf">fun_goto</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute goto command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">target_step</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">target_step</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">step_cache</span><span class="p">:</span>
+                <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;unKown step&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">step_cache</span><span class="p">[</span><span class="n">target_step</span><span class="p">],</span> <span class="n">trace</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;running error: &quot;</span><span class="p">,</span> <span class="s2">&quot;goto command execute failed&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Interpreter.fun_listen"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.fun_listen">[docs]</a>    <span class="k">def</span> <span class="nf">fun_listen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute listen command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">words</span> <span class="o">=</span>  <span class="n">listen_dict</span><span class="p">[</span><span class="n">listen_method</span><span class="p">](</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">words</span>
+            <span class="n">logger</span> <span class="o">=</span> <span class="n">get_user_logger</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;conversation_for_</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;User: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">words</span><span class="p">))</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s1">&#39;running error: &#39;</span><span class="p">,</span> <span class="s1">&#39;listen command failed&#39;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Interpreter.fun_set"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.fun_set">[docs]</a>    <span class="k">def</span> <span class="nf">fun_set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute set command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">key</span> <span class="o">=</span>  <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">expr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_expr</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">var_cache</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">expr</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s1">&#39;running error: &#39;</span><span class="p">,</span> <span class="s1">&#39;set command failed&#39;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+    
+<div class="viewcode-block" id="Interpreter.fun_import"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.fun_import">[docs]</a>    <span class="k">def</span> <span class="nf">fun_import</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute import command</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+            <span class="n">codes</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">interpret</span><span class="p">(</span><span class="n">codes</span><span class="p">,</span> <span class="n">file_path</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">raise_error</span><span class="p">(</span><span class="s1">&#39;running error: &#39;</span><span class="p">,</span><span class="s2">&quot;import file failed, please check the path&quot;</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+<div class="viewcode-block" id="Interpreter.run"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.run">[docs]</a>    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">commands</span><span class="p">,</span> <span class="n">trace</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        execute command with hyper functions </span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">command_fun</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;speak&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun_speak</span><span class="p">,</span>
+            <span class="s1">&#39;listen&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun_listen</span><span class="p">,</span>
+            <span class="s1">&#39;import&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun_import</span><span class="p">,</span>
+            <span class="s1">&#39;branch&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun_branch</span><span class="p">,</span>
+            <span class="s1">&#39;switch&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun_switch</span><span class="p">,</span>
+            <span class="s1">&#39;set&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun_set</span><span class="p">,</span>
+            <span class="s1">&#39;goto&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fun_goto</span>
+        <span class="p">}</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="kc">None</span><span class="p">])</span>
+        
+        <span class="k">for</span> <span class="n">command</span> <span class="ow">in</span> <span class="n">commands</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">command</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;branch&#39;</span><span class="p">,</span> <span class="s1">&#39;default&#39;</span><span class="p">]:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">command_fun</span><span class="p">[</span><span class="n">command</span><span class="p">[</span><span class="s1">&#39;command&#39;</span><span class="p">]](</span><span class="n">command</span><span class="p">[</span><span class="s1">&#39;parameters&#39;</span><span class="p">],</span> <span class="n">trace</span> <span class="o">+</span> <span class="n">command</span><span class="p">[</span><span class="s1">&#39;trace&#39;</span><span class="p">]):</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cur_switch</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="Interpreter.interpret"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.interpreter.Interpreter.interpret">[docs]</a>    <span class="k">def</span> <span class="nf">interpret</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">codes</span> <span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">trace</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            the main step of interprete</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+
+        <span class="n">cur_step</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">main</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># scan the codes and push them into step_dict</span>
+        <span class="k">for</span> <span class="n">line</span><span class="p">,</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">codes</span><span class="p">):</span>
+            <span class="n">tmp_trace</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;(</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s1">)line</span><span class="si">{</span><span class="n">line</span><span class="si">}</span><span class="s1"> :</span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s1">&#39;</span>
+
+            <span class="c1"># skip the blank line</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">split</span><span class="p">())</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span> <span class="k">continue</span>
+
+            <span class="n">parse_result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">parse_result</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;sytnax error: &quot;</span><span class="p">,</span> <span class="n">parse_result</span><span class="p">,</span> <span class="n">trace</span> <span class="o">+</span> <span class="n">tmp_trace</span><span class="p">)</span>
+                <span class="k">return</span>
+            
+            <span class="c1"># process the &#39;step&#39; command</span>
+            <span class="k">if</span> <span class="n">parse_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;step&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">cur_step</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;compile error&quot;</span><span class="p">,</span> <span class="s2">&quot;Nested step declarations are not allowed&quot;</span><span class="p">,</span>  <span class="n">trace</span> <span class="o">+</span> <span class="n">tmp_trace</span><span class="p">)</span>
+                    <span class="k">return</span>
+                <span class="n">cur_step</span> <span class="o">=</span> <span class="n">parse_result</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">step_cache</span><span class="p">[</span><span class="n">cur_step</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="c1"># process the &#39;stepover&#39; command</span>
+            <span class="k">elif</span> <span class="n">parse_result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;stepover&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cur_step</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">raise_error</span><span class="p">(</span><span class="s2">&quot;compile error&quot;</span><span class="p">,</span> <span class="s2">&quot;Step and Stepover do not match&quot;</span><span class="p">,</span> <span class="n">trace</span> <span class="o">+</span> <span class="n">tmp_trace</span><span class="p">)</span>
+                    <span class="k">return</span>
+                <span class="n">cur_step</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="c1"># store the other command to the Corresponding cache</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">cur_step</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+                    <span class="n">main</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;command&#39;</span><span class="p">:</span> <span class="n">parse_result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+                                <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="n">parse_result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                <span class="s1">&#39;trace&#39;</span><span class="p">:</span> <span class="n">tmp_trace</span><span class="p">})</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">step_cache</span><span class="p">[</span><span class="n">cur_step</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s1">&#39;command&#39;</span><span class="p">:</span> <span class="n">parse_result</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> 
+                                                    <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="n">parse_result</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+                                                    <span class="s1">&#39;trace&#39;</span><span class="p">:</span> <span class="n">tmp_trace</span><span class="p">})</span>
+            
+        <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">,</span> <span class="n">trace</span><span class="p">)</span></div></div>
+        
+
+    
+            
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -4,6 +4,5 @@
 .. toctree::
     :maxdepth: 3
 
-    challenge_settings
-    league
-    submit
+    拓展包添加
+    语法修改

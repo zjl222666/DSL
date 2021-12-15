@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SerWise.core.database &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> SerWise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation/index.html">安装教程</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../SerWise%20doc/index.html">SerWise文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../developer/index.html">开发者文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../core_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">SerWise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../index.html">Module code</a> &raquo;</li>
+      <li>SerWise.core.database</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for SerWise.core.database</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">sqlite3</span>
+<span class="kn">from</span> <span class="nn">SerWise.setting</span> <span class="kn">import</span> <span class="n">database_path</span><span class="p">,</span> <span class="n">database_header</span><span class="p">,</span> <span class="n">database_table_name</span>
+<span class="kn">from</span> <span class="nn">SerWise.util.logger</span> <span class="kn">import</span> <span class="n">get_core_logger</span>
+
+<div class="viewcode-block" id="userDatabase"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.database.userDatabase">[docs]</a><span class="k">class</span> <span class="nc">userDatabase</span><span class="p">:</span>
+    <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Overview:</span>
+<span class="sd">        Used to manage user database, read and write, modify the information in it</span>
+<span class="sd">    Note:</span>
+<span class="sd">        Many settings of the database can be set in setting.py</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span> <span class="o">=</span> <span class="n">sqlite3</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">database_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">cursor</span><span class="p">()</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="o">+</span><span class="s2">&quot; string,&quot;</span><span class="p">,</span> <span class="n">database_header</span><span class="p">)))[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;create table if not exists &#39;</span> <span class="o">+</span> <span class="n">database_table_name</span> <span class="o">+</span> \
+              <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="n">header</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+<div class="viewcode-block" id="userDatabase.result_save"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.database.userDatabase.result_save">[docs]</a>    <span class="k">def</span> <span class="nf">result_save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">table_name</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span> <span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        overview:</span>
+<span class="sd">            According to the input table name and dictionary key, construct a new table, and store the dictionary value correspondingly in the database</span>
+<span class="sd">        Paramters:</span>
+<span class="sd">            - table_name&lt;str&gt;: table name</span>
+<span class="sd">            - dict&lt;dict&gt;: the dict need to be parsed and store into database</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">header</span> <span class="o">=</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span> <span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span><span class="o">+</span><span class="s2">&quot; string,&quot;</span><span class="p">,</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">())))[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;drop table if exists &#39;</span> <span class="o">+</span> <span class="n">table_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+        <span class="n">sql</span> <span class="o">=</span> <span class="s1">&#39;create table &#39;</span> <span class="o">+</span> <span class="n">table_name</span> <span class="o">+</span> \
+              <span class="s1">&#39;(&#39;</span> <span class="o">+</span> <span class="n">header</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;insert into &quot;</span> <span class="o">+</span> <span class="n">table_name</span>  <span class="o">+</span> <span class="s1">&#39; values &#39;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span>  <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;&quot;&#39;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span><span class="nb">dict</span><span class="o">.</span><span class="n">values</span><span class="p">())))</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="n">sql</span> <span class="o">+=</span> <span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="userDatabase.insert_value"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.database.userDatabase.insert_value">[docs]</a>    <span class="k">def</span> <span class="nf">insert_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Insert data into the user table</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">            values: The data to be inserted requires the same format with header</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;insert into &quot;</span> <span class="o">+</span> <span class="n">database_table_name</span>  <span class="o">+</span> <span class="s1">&#39; values &#39;</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="s1">&#39;(&#39;</span> <span class="o">+</span>  <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="s1">&#39;&quot;&#39;</span><span class="o">+</span> <span class="n">x</span><span class="o">+</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">,</span><span class="n">values</span><span class="p">)))</span> <span class="o">+</span> <span class="s1">&#39;)&#39;</span>
+        <span class="n">sql</span> <span class="o">+=</span> <span class="n">values</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">executer</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="userDatabase.select_with_id"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.database.userDatabase.select_with_id">[docs]</a>    <span class="k">def</span> <span class="nf">select_with_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span> <span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Read user information by user id</span>
+<span class="sd">        Parameters:</span>
+<span class="sd">            id &lt;str&gt;: user id</span>
+<span class="sd">        Return:</span>
+<span class="sd">            Formatted dict</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;select &quot;</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">database_header</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39; from &#39;</span> <span class="o">+</span> <span class="n">database_table_name</span>
+        <span class="n">sql</span> <span class="o">+=</span> <span class="s1">&#39; where id = &#39;</span> <span class="o">+</span> <span class="nb">id</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">ans</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">content</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
+                <span class="n">result</span><span class="p">[</span><span class="s1">&#39;$&#39;</span> <span class="o">+</span> <span class="n">database_header</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">content</span>
+        <span class="k">return</span> <span class="n">result</span></div>
+
+<div class="viewcode-block" id="userDatabase.get_num"><a class="viewcode-back" href="../../../core_doc/core.html#SerWise.core.database.userDatabase.get_num">[docs]</a>    <span class="k">def</span> <span class="nf">get_num</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Overview:</span>
+<span class="sd">            Get the number of users in the table</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">sql</span> <span class="o">=</span> <span class="s2">&quot;select count(id) from &quot;</span> <span class="o">+</span> <span class="n">database_table_name</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conn</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">ans</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span></div></div>
+    
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

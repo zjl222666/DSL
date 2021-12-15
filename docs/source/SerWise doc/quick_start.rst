@@ -8,56 +8,48 @@ Quick Start
 
 .. code-block:: c++
 
-    set: $welcome, "您好，欢迎使用SerWise"
+    speak: "您好，请告诉我您的姓名"
+    set: $welcome, " ，欢迎使用SerWise"
     listen: $name
     speak: $name + $welcome
 
-以上是一个简单的Serwise脚本
+以上是一个简单的Serwise脚本，serWise脚本的后缀统一规定为*.svl，在成功使用pip安装Serwise后，您可以直接在命令行中输入以下命令运行该脚本
+
+.. code-block:: bash
+
+    serwise  demo.svl
+
+.. only:: html
+
+    .. figure:: images/demo_1.gif
+      :width: 600
+      :align: center
+
+      dome.svl运行实例
 
 
-Customize your config
+
+多进程模式
 ============================
 
-Class ``Server`` use default config to generate a game environment. To customize your environment, you can change the parameters and parse them to ``Server``.
+serwise 为脚本编写者提供了多进程服务启动模式， 运行时加入 ``--muti_process`` 选项
 
-Add more players in a game
+.. code-block:: bash
+
+    serwise demo.svl --muti_process
+
+
+.. only:: html
+
+    .. figure:: images/demo_2.gif       
+      :width: 600
+      :align: center
+      
+      多进程运行实例
+
+启动进程
 ------------------------------------
 
-For example, you may want to allow 6 teams and 2 players per team in your game, and then please add ``team_num`` and ``player_num_per_team`` in config and parse it to ``Server``.
-
-.. code-block:: python
-
-    from gobigger.server import Server
-
-    server = Server(dict(
-        team_num=6, 
-        player_num_per_team=2
-    ))
-
-Extend the game time
-------------------------------------
-If you want to extend the game time to 20 minutes (1200 seconds), you can use the following codes.
-
-.. code-block:: python
-
-    from gobigger.server import Server
-
-    server = Server(dict(
-        match_time=1200
-    ))
-
-Change the size of the map
-------------------------------------
-
-If you want to have a larger map, you can change ``map_width`` and ``map_height`` in config.
-
-.. code-block:: python
-
-    from gobigger.server import Server
-    
-    server = Server(dict(
-        map_width=1000,
-        map_height=1000,
-    ))
+默认进程创建触发的方式为键盘输入Tab，服务器退出触发方式为键盘输入ESC，更多形式参见 :doc:`解释器配置 <更多配置>`
 
 

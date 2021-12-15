@@ -1,10 +1,10 @@
 from logging import log
-import threading
-from pynput.keyboard import Key, Listener
 from SerWise.util.logger import get_core_logger, get_user_logger
+from SerWise.server.process import DslProcess
+from SerWise.API.muti_process import thread_queue, muti_processer_dict
+from SerWise.setting import muti_process_method
 import subprocess
 import argparse
-from queue import Queue
 from threading import Thread
 from rich.progress import track
 from rich import print
@@ -12,11 +12,19 @@ from rich.console import Console
 from rich.table import Table
 import time
 import os
-from SerWise.server.process import DslProcess
-import SerWise.server.process
+import sys
+import signal
 
-thread_queue = Queue()
+
+
+
 class server:
+    '''
+    Overview:
+        The main class of the program, responsible for the scheduling and operation of the process and information feedback
+    Parameters:
+        - file_path <str>: the file path of the script will be run
+    '''
     def __init__(self, file_path) -> None:
         self.process = []
         self.process_info = []
@@ -25,6 +33,10 @@ class server:
 
 
     def create_process(self):
+        '''
+        Overview:
+            Start a conversation process
+        '''
         id = str(len(self.process))
         start_time = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
         state = "running"
@@ -34,7 +46,10 @@ class server:
         self.process_info.append([id, start_time, state])
 
     def print_state(self):
-
+        '''
+        Overview:
+            Print the current status of all processes
+        '''
         for id,process in enumerate(self.process):
             if process.poll() == 0:
                 self.process_info[id][2] = "over"
@@ -50,61 +65,61 @@ class server:
             color = "green" if process_info[2] == 'running' else "red"
             state = "[" + color + "]" + process_info[2] + "[/" + color + "]"
             table.add_row( "[bold]" + process_info[0] + "[/bold]", process_info[1], state)
+
         os.system('cls') 
         self.console.print(table)  
 
 
     def main(self):
+        '''
+        Overview:
+            the main step of the server
+        '''
         for s in track(range(10), description='正在读取脚本....'):
             time.sleep(0.3)
             
-        thread = Thread(target=self.key_board_listen)
+        thread = Thread(target=muti_processer_dict[muti_process_method])
         thread.start()
+
+
         while True:
+
+            # Attempt to read the process wakeup/end information once per second
             try:
                 value = thread_queue.get(timeout=1)
             except:
                 value = ""
+            
+
             if value == "creat":
                 self.create_process()
             elif value == "over":
                 thread.join()
-                for process in track(self.process, description='正在杀死未结束进程...'): 
-                    time.sleep(1) 
-                    process.kill()   
+                if sys.platform[0] == 'L':
+                    for process in track(self.process, description='正在杀死未结束进程...'): 
+                        time.sleep(1)
+                        os.kill(process.pid, signal.SIGTERM)                   
                     self.print_state()    
                 break
             self.print_state()
 
 
-    def key_board_listen(self):
-        logger = get_core_logger("keyboard_listen")
-        def on_press(key):
-            logger.info(f"输入{key}")
-        def on_release(key):
-            global thread_queue
-            if key == Key.tab:
-                logger.info(f"创建对话")
-                thread_queue.put("creat")
-            if key == Key.esc:
-                logger.info(f"结束退出")
-                thread_queue.put("over")
-                return False
-
-        with Listener(on_press=on_press,on_release=on_release) as listener:
-            listener.join()
     
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--muti_process', action='store_true')
-    parser.add_argument('--file_path', type=str, required=True)
+    parser.add_argument('file_path', type=str, help="path of your script file")
     args = parser.parse_args()
-    if args.mult_process:
+    if args.muti_process:
         myServer = server(args.file_path)
         myServer.main()
     else:
-        DSL.server.process.main()
+        f = open(args.file_path, encoding="utf-8")
+        codes = f.readlines()
+        f.close()
+        process = DslProcess("0", codes, args.file_path)
+        process.run()
         
 if __name__ == '__main__':
     main()

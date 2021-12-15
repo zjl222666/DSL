@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>解释器配置 &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="脚本错误报告" href="%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html" />
+    <link rel="prev" title="分支" href="%E5%88%86%E6%94%AF.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> SerWise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SerWise文档</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99.html">语法规则</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%88%86%E6%94%AF.html">分支</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">解释器配置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">调试选项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">拓展包选项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">数据库选项</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">常规选项</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">脚本错误报告</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">开发者文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SerWise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">SerWise文档</a> &raquo;</li>
+      <li>解释器配置</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/SerWise doc/更多配置.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="id1">
+<h1>解释器配置<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p>配置步骤:</p>
+<ol class="arabic simple">
+<li><p>首先，您需要确保使用 ‘-e’ 指令下载并安装了本程序包</p></li>
+<li><p>进入安装目录并打开 <code class="docutils literal notranslate"><span class="pre">SerWise/setting.py</span></code></p></li>
+<li><p>源文件内容如下所示:</p></li>
+</ol>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="c1"># setting user logging</span>
+<span class="n">user_logging_level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
+
+<span class="c1"># setting core logging level</span>
+<span class="n">core_logging_level</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span>
+
+<span class="c1"># setting process create and server quit method</span>
+<span class="n">muti_process_method</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Optional:</span>
+<span class="sd">- default</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># setting listen method</span>
+<span class="n">listen_method</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Optional:</span>
+<span class="sd">- default</span>
+<span class="sd">- clock</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># setting speak method</span>
+<span class="n">speak_method</span> <span class="o">=</span> <span class="s1">&#39;default&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Optional:</span>
+<span class="sd">- default</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># setting analyzer</span>
+<span class="n">analyzer_chosen</span> <span class="o">=</span> <span class="s1">&#39;contain&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Optional:</span>
+<span class="sd">- default</span>
+<span class="sd">- contain</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+
+<span class="c1"># setting process start pattern</span>
+<span class="n">user_setting</span> <span class="o">=</span> <span class="s1">&#39;random&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Optional:</span>
+<span class="sd">- input: console input</span>
+<span class="sd">- random: automatically generate</span>
+<span class="sd">- None: none user information</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># setting whether to save the var_cache to sqlite</span>
+<span class="n">save_var</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Optional:</span>
+<span class="sd">- True</span>
+<span class="sd">- False</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># setting path of user database</span>
+<span class="n">database_path</span> <span class="o">=</span> <span class="s2">&quot;user.sqlite&quot;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">input the database file path</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="c1"># setting database header</span>
+<span class="n">database_header</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;age&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;balance&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;phone&#39;</span>
+
+<span class="p">]</span>
+
+<span class="c1"># setting table name to extract</span>
+<span class="n">database_table_name</span> <span class="o">=</span> <span class="s1">&#39;user&#39;</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">input the database table name to store the user information</span>
+<span class="sd">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>调试选项<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>开发者可以根据自己的需要修改调试日志的输出等级 <code class="docutils literal notranslate"><span class="pre">INFO</span></code>, <code class="docutils literal notranslate"><span class="pre">DEBUG</span></code> 等</p>
+<p>调试日志又分为用户日志和内核日志，如需阅读内核日志，请参考API Doc</p>
+<ul class="simple">
+<li><p>setting.py: user_logging_level</p></li>
+<li><p>setting.py: core_logging_level</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>拓展包选项<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>拓展包选项目前支持 <code class="docutils literal notranslate"><span class="pre">listen</span></code> <code class="docutils literal notranslate"><span class="pre">speak</span></code> <code class="docutils literal notranslate"><span class="pre">branch</span></code> 三个指令 以及多进程启动的进程唤醒方式</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>所有支持拓展包的指令参数个数均无限制，除基本解释器必须的参数外，剩余的参数将按顺序被打包成数组形式传送给拓展包使用</p>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">listen</span></code></p>
+<ul class="simple">
+<li><p>参数: kwargs</p></li>
+<li><p>返回值: 用户输入的字符串</p></li>
+<li><p>setting.py: listen_method</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 85%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>可选包名</p></th>
+<th class="head"><p>功能逻辑</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>default</p></td>
+<td><p>从控制台获取用户输入，用户需输入回车方可提交</p></td>
+</tr>
+<tr class="row-odd"><td><p>clock</p></td>
+<td><p>从控制台获取用户输入，添加计时等
+待功能，可通过kwargs传递等待时间，若不传递则默认等待十秒</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">speak</span></code></p>
+<ul class="simple">
+<li><p>参数: output_words, kwargs -&gt; 待输出的字符串</p></li>
+<li><p>返回值: boolean -&gt; 表示是否输出成功</p></li>
+<li><p>setting.py: speak_method</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23%" />
+<col style="width: 77%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>可选包名</p></th>
+<th class="head"><p>功能逻辑</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>default</p></td>
+<td><p>通过控制台和log文件打印输出</p></td>
+</tr>
+</tbody>
+</table>
+<p><code class="docutils literal notranslate"><span class="pre">branch</span></code></p>
+<ul class="simple">
+<li><p>参数: pattern, s, kwargs -&gt; 待匹配的模式串，待匹配的字符串</p></li>
+<li><p>返回值: boolean -&gt; 表示匹配是否成功</p></li>
+<li><p>setting.py: branch_method</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 85%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>可选包名</p></th>
+<th class="head"><p>功能逻辑</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>default</p></td>
+<td><p>直接判别模式串是否与待匹配串完全相等</p></td>
+</tr>
+<tr class="row-odd"><td><p>contain</p></td>
+<td><p>若不传递参数kwargs，则判
+别模式串中是否包含待匹配串，若kwargs中包含’len’选项，此
+时模式串应当设置为数字，判别待匹配串长度是否与该数字相同</p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p>多进程唤醒方式</p></li>
+</ul>
+<p>编写逻辑: server将为多进程唤醒包申请一个额外线程，并通过thread_queue进行通信</p>
+<p>每当需要唤醒一个线程，则在thread_queue中put一个字符串:”创建线程”</p>
+<p>当需要结束主程序server时，则在thread_queue中put一个字符串: “结束退出”</p>
+<ul class="simple">
+<li><p>setting.py: muti_process_method</p></li>
+</ul>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17%" />
+<col style="width: 83%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>可选包名</p></th>
+<th class="head"><p>功能逻辑</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>default</p></td>
+<td><p>键盘输入Tab唤醒进程，键盘输入Esc退出程序</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="id4">
+<h2>数据库选项<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>setting.py: database_path</p></li>
+<li><p>setting.py: database_table_name</p></li>
+<li><p>setting.py: database_header</p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>常规选项<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>setting.py: save_var</p></li>
+<li><p>setting.py: user_setting</p></li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="%E5%88%86%E6%94%AF.html" class="btn btn-neutral float-left" title="分支" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html" class="btn btn-neutral float-right" title="脚本错误报告" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,29 +1,51 @@
-from SerWise.setting import user_setting,user_num,save_var
+from SerWise.setting import user_setting,save_var
 from SerWise.util.error import raise_error
 from SerWise.util.logger import get_user_logger, get_core_logger
-from SerWise.API.database import userDatabase
+from SerWise.core.database import userDatabase
 from SerWise.core.interpreter import Interpreter
+from SerWise.setting import user_setting
 import random
+import sys
 import argparse
+import os
+from rich import print
 
 class DslProcess:
+    '''
+    Overview:
+        Class used to create, manage, and run a customer service dialogue process
+    Parameters:
+        - id <str> : id for current process
+        - codes <list[str]> : script the process will run
+        - file <str> : the file path of script
+    Returns:
+        None  
+    '''
     def __init__(self, id : str, codes : list, file : str):
+
         self.id = id
         self.codes = codes
         self.file = file
-        self.logger = get_user_logger(f"conversation_{id}")
+        self.logger = get_user_logger(f"conversation_for_{id}")
         self.database = userDatabase()
         self.interpreter = Interpreter(id)
-        self.logger.info(f"process {id} start successfully")
+        self.logger.debug(f"service process {id} start successfully")
 
 
     def run(self):
-        
+        '''
+        Overview:
+            the main step of a customer service dialogue process
+        '''
+
+        user_num = self.database.get_num()
         if user_setting == 'input':
-            self.logger.info(f"请输入用户id, 最大用户id为{user_num}")
+            self.logger.info(f"请输入用户id, 目前数据库中用户人数为{user_num}")
             id = input()
         elif user_setting == 'random':
+            self.logger.debug(f"随机生成用户id，目前库中用户总数为{user_num}")
             id = str(random.randint(0, user_num - 1))
+            self.logger.debug(f"生成用户id为{id}")
         else:
             id = ""
 
@@ -41,7 +63,7 @@ class DslProcess:
 
         if save_var:
             self.database.result_save(f"result_{self.id}", self.interpreter.var_cache)
-            self.logger.info(f"已将过程变量存入数据库中，table名为result_{self.id}")
+            self.logger.debug(f"已将过程变量存入数据库中，table名为result_{self.id}")
 
 
 def main():
@@ -54,6 +76,7 @@ def main():
     f.close()
     process = DslProcess(args.id, codes, args.file_path)
     process.run()
+    os.system("pause")
 
 if __name__ == "__main__":
     main()

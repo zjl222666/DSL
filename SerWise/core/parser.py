@@ -12,6 +12,16 @@ class Parser:
     '''
     
     def parse(self, sentence: str):
+        '''
+        Parse a serwise statement and return it to the interpreter in format
+        Paramters:
+            - sentence <str> : the statement need to be parsed
+        Return:
+            a tuple:
+                - command name
+                - parameters
+        '''
+
         # pretreatment
         if comment_char in sentence:
             sentence = sentence[:sentence.find(comment_char)]        

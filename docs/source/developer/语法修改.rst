@@ -1,0 +1,43 @@
+语法修改
+==========
+
+serWise支持自定义语法风格，包括
+
+在解释器核中定义的正则表达式如下:
+
+``SerWise/core/rules/py``
+
+.. code-block:: python
+
+    '''
+    syntax rules:
+    '''
+    Parameters_patern = {
+        "var": r'^\$[a-z0-9_]+$', # 标识符正则表达式
+        "expr": r'^((".*")|(\$[a-z0-9_]+))(([\s]*)(\+)([\s]*)((".*")|(\$[a-z0-9_]+)))*$', # 字符串表达式
+        "step_name": r'^[a-z_]+$', # step模块名
+        "path": r'^.*$' # 路径
+    }
+    Parameter_split = ',' # 指令与参数间的分隔符
+
+    # 指令极其对应的参数类型
+    command = {r'step' : ['step_name'], 
+            r'stepover': [],  
+            r'set': ['var', 'expr'],
+            r'import': ['path'],
+            r'goto': ['step_name'],
+            r'switch': ['expr'],
+            r'listen': ['var', 'kwarg'],
+            r'branch': ['expr', 'step_name', 'kwarg'],
+            r'speak': ['expr', 'kwarg']}
+
+    command_split = ':' # 指令与参数间的分隔符号
+    change_to_lower = True # 是否开启大小写不敏感
+    comment_char = '#' # 声明注释的符号
+
+.. warning::
+
+    rules.py仅与parser关联，无法改变内部解释器的运行逻辑
+
+    若需要进一步修改逻辑，请参照API Doc
+    

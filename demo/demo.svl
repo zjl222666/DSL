@@ -1,3 +1,4 @@
-set: $welcome, "您好，欢迎使用SerWise"
+speak: "您好，请告诉我您的姓名"
+set: $welcome, " ，欢迎使用SerWise"
 listen: $name
 speak: $name + $welcome

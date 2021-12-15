@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>分支 &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="解释器配置" href="%E6%9B%B4%E5%A4%9A%E9%85%8D%E7%BD%AE.html" />
+    <link rel="prev" title="语法规则" href="%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> SerWise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SerWise文档</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99.html">语法规则</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">分支</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step">模块化脚本编写–step</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#goto">无条件分支跳转 – goto</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#switch-branch">判别式分支切换 – switch,branch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import">文件导入执行 – import</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E6%9B%B4%E5%A4%9A%E9%85%8D%E7%BD%AE.html">解释器配置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86.html">脚本错误报告</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">开发者文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SerWise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">SerWise文档</a> &raquo;</li>
+      <li>分支</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/SerWise doc/分支.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="id1">
+<h1>分支<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>分支逻辑是自动回复脚本的核心，serWise提供了强大的分支逻辑设计功能</p>
+<div class="section" id="step">
+<h2>模块化脚本编写–step<a class="headerlink" href="#step" title="Permalink to this headline">¶</a></h2>
+<p>serWise中没有代码块(block)的概念，与之相对的serWise提供step分支模块化编写</p>
+<p>编写逻辑如下:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">step</span><span class="p">:</span> <span class="n">step_name</span>
+    <span class="p">......</span> <span class="c1">// 内部代码设计</span>
+<span class="n">stepover</span>
+</pre></div>
+</div>
+<p><strong>step指令</strong>: <code class="docutils literal notranslate"><span class="pre">step:</span> <span class="pre">step_name</span></code> 声明step分支的开始，需要一个参数为分支名，命名规则为仅包含字母即下划线</p>
+<p><strong>stepover指令</strong>: <code class="docutils literal notranslate"><span class="pre">stepover</span></code> 声明step分支的结束，不需要参数</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic">
+<li><p>step模块编写无缩进要求，根据step和stepover指令分隔，注意step和stepover指令必须 <strong>成对出现</strong></p></li>
+<li><p>serWise不支持step模块嵌套编写:</p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">step</span><span class="p">:</span> <span class="n">step1</span>
+    <span class="nl">step</span><span class="p">:</span> <span class="n">step2</span>
+    <span class="n">stepover</span>
+<span class="n">stepover</span>
+</pre></div>
+</div>
+<p>如上写法将会触发语法错误</p>
+</div></blockquote>
+</li>
+<li><p>在step模块中编写的语句不会马上执行，而需要等分支的调用/跳转</p></li>
+</ol>
+</div>
+</div>
+<div class="section" id="goto">
+<h2>无条件分支跳转 – goto<a class="headerlink" href="#goto" title="Permalink to this headline">¶</a></h2>
+<p><strong>goto指令</strong>: <code class="docutils literal notranslate"><span class="pre">goto:</span> <span class="pre">step_name</span></code> 该指令将无条件跳转到目标step模块中</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">step</span><span class="p">:</span> <span class="n">welcome</span>
+    <span class="nl">set</span><span class="p">:</span> <span class="n">$welcome</span><span class="p">,</span> <span class="s">&quot; ，欢迎使用SerWise&quot;</span>
+    <span class="nl">speak</span><span class="p">:</span> <span class="s">&quot;您好，请告诉我您的姓名&quot;</span>
+<span class="n">stepover</span>
+
+<span class="nl">step</span><span class="p">:</span> <span class="n">get_name</span>
+    <span class="nl">listen</span><span class="p">:</span> <span class="n">$name</span>
+<span class="n">stepover</span>
+
+<span class="k">goto</span><span class="o">:</span> <span class="n">welcome</span>
+<span class="k">goto</span><span class="o">:</span> <span class="n">get_name</span>
+<span class="nl">speak</span><span class="p">:</span> <span class="n">$name</span> <span class="o">+</span> <span class="n">$welcome</span>
+</pre></div>
+</div>
+<p>上述例子将按顺序执行welcome和get_name中的语句，最后返回主程序中</p>
+</div>
+<div class="section" id="switch-branch">
+<h2>判别式分支切换 – switch,branch<a class="headerlink" href="#switch-branch" title="Permalink to this headline">¶</a></h2>
+<p><strong>switch指令</strong>: <code class="docutils literal notranslate"><span class="pre">switch:</span> <span class="pre">$var</span></code> 该指令需要一个参数，即指定参与判别的标识符</p>
+<p><strong>branch指令</strong>: <code class="docutils literal notranslate"><span class="pre">branch:</span> <span class="pre">string,</span> <span class="pre">step_name</span></code> 该指令需要两个参数，第一个参数为标识符需要匹配的对象，第二个参数为目标分支名，当指定的标识符与匹配对象匹配时，将会直接将切换当前分支到目标分支</p>
+<p><strong>branch指令需要紧跟在switch指令或上一个branch指令后出现</strong></p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">step</span><span class="p">:</span> <span class="n">male</span>
+    <span class="nl">speak</span><span class="p">:</span> <span class="s">&quot;你好，先生&quot;</span>
+<span class="n">stepover</span>
+
+<span class="nl">step</span><span class="p">:</span> <span class="n">female</span>
+    <span class="nl">speak</span><span class="p">:</span> <span class="s">&quot;你好，女士&quot;</span>
+<span class="n">stepover</span>
+
+<span class="nl">step</span><span class="p">:</span> <span class="n">switch_gender</span>
+    <span class="nl">listen</span><span class="p">:</span> <span class="n">$gender</span>
+    <span class="nl">swicth</span><span class="p">:</span> <span class="n">$gender</span>
+        <span class="nl">branch</span><span class="p">:</span> <span class="s">&quot;male&quot;</span><span class="p">,</span> <span class="n">male</span>
+        <span class="nl">branch</span><span class="p">:</span> <span class="s">&quot;female&quot;</span><span class="p">,</span> <span class="n">female</span>
+<span class="n">stepover</span>
+
+<span class="k">goto</span><span class="o">:</span> <span class="n">switch_gender</span>
+</pre></div>
+</div>
+<p>利用switch-branch语句，可以很容易地编写出如上所示的判别逻辑，根据用户输入的性别对应给与回复</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>goto指令和branch指令在逻辑上有本质不同，goto是跳转，即执行完goto指令后，会继续执行当前分支的剩余内容，而branch是切换，会直接切换到目标分支，不会执行当前分支（包括主程序）的剩余内容</p>
+<p><strong>因此不建议在主程序中使用branch切换分支语句</strong></p>
+</div>
+</div>
+<div class="section" id="import">
+<h2>文件导入执行 – import<a class="headerlink" href="#import" title="Permalink to this headline">¶</a></h2>
+<p><strong>import指令</strong>: <code class="docutils literal notranslate"><span class="pre">import:</span> <span class="pre">file_path</span></code> 该指令将读取目标文件并执行目标文件中的serWise语句</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ol class="arabic simple">
+<li><p>serWise的引入规则与python类似，import语句可以在任意位置添加，除了添加目标文件的step模块外， <strong>会直接执行目标文件的主程序内容</strong></p></li>
+<li><p><strong>serWise的step模块和字符串标识符值全局共享</strong></p></li>
+</ol>
+</div>
+<dl>
+<dt><code class="docutils literal notranslate"><span class="pre">example</span></code>:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">file1.svl</span></code></p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">set</span><span class="p">:</span> <span class="n">$welcome</span><span class="p">,</span> <span class="s">&quot;您好,请告诉我您的名字&quot;</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">file2.svl</span></code></p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="nl">step</span><span class="p">:</span> <span class="n">get_name</span>
+    <span class="k">import</span><span class="o">:</span> <span class="n">file1</span><span class="p">.</span><span class="n">svl</span>
+    <span class="nl">speak</span><span class="p">:</span> <span class="n">$welcome</span>
+    <span class="nl">listen</span><span class="p">:</span> <span class="n">$name</span>
+<span class="n">stepover</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">main.svl</span></code></p>
+<blockquote>
+<div><div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="k">import</span><span class="o">:</span> <span class="n">file2</span><span class="p">.</span><span class="n">svl</span>
+<span class="k">goto</span><span class="o">:</span> <span class="n">get_name</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p>以上是一个简单的文件导入示例</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="%E8%AF%AD%E6%B3%95%E8%A7%84%E5%88%99.html" class="btn btn-neutral float-left" title="语法规则" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="%E6%9B%B4%E5%A4%9A%E9%85%8D%E7%BD%AE.html" class="btn btn-neutral float-right" title="解释器配置" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

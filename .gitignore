@@ -5,7 +5,6 @@ __pycache__/
 *.egg-info/
 *.log
 .cache/
-**/build/
 *.mp4
 .pytest_cache/
 *.txt

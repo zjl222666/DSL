@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>core &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="server" href="server.html" />
+    <link rel="prev" title="API Doc" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> SerWise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SerWise%20doc/index.html">SerWise文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">开发者文档</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Doc</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">core</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#interpreter">Interpreter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#parser">Parser</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#userdatabase">userDatabase</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="server.html">server</a></li>
+<li class="toctree-l2"><a class="reference internal" href="utils.html">utils</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SerWise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">API Doc</a> &raquo;</li>
+      <li>core</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/core_doc/core.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="core">
+<h1>core<a class="headerlink" href="#core" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="interpreter">
+<h2>Interpreter<a class="headerlink" href="#interpreter" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="SerWise.core.interpreter.Interpreter">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">SerWise.core.interpreter.</span></code><code class="sig-name descname"><span class="pre">Interpreter</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>overview:</dt><dd><p>interpreter of serWise, it will interpret and execute each serwise statement that has been parsed</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.add_var">
+<code class="sig-name descname"><span class="pre">add_var</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">val</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.add_var"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.add_var" title="Permalink to this definition">¶</a></dt>
+<dd><p>Prepare for user information initialization</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.calculate_expr">
+<code class="sig-name descname"><span class="pre">calculate_expr</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">expr</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.calculate_expr"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.calculate_expr" title="Permalink to this definition">¶</a></dt>
+<dd><p>a hyper function to calculate the expression of string</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="SerWise.core.interpreter.Interpreter.cur_switch">
+<code class="sig-name descname"><span class="pre">cur_switch</span></code><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.cur_switch" title="Permalink to this definition">¶</a></dt>
+<dd><p>a stack for labeling whether the running codes is in switch block and record the switch expr
+if not : (0,None)
+in but haven’t go into any branch: (1,z)
+in and go into a branch: (2,z)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.fun_branch">
+<code class="sig-name descname"><span class="pre">fun_branch</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.fun_branch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.fun_branch" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute branch command</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.fun_goto">
+<code class="sig-name descname"><span class="pre">fun_goto</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.fun_goto"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.fun_goto" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute goto command</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.fun_import">
+<code class="sig-name descname"><span class="pre">fun_import</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.fun_import"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.fun_import" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute import command</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.fun_listen">
+<code class="sig-name descname"><span class="pre">fun_listen</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.fun_listen"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.fun_listen" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute listen command</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.fun_set">
+<code class="sig-name descname"><span class="pre">fun_set</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.fun_set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.fun_set" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute set command</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.fun_speak">
+<code class="sig-name descname"><span class="pre">fun_speak</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.fun_speak"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.fun_speak" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute speak command</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.fun_switch">
+<code class="sig-name descname"><span class="pre">fun_switch</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameters</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.fun_switch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.fun_switch" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute switch command</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.interpret">
+<code class="sig-name descname"><span class="pre">interpret</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">codes</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">list</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.interpret"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.interpret" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>the main step of interprete</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.interpreter.Interpreter.run">
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">commands</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">trace</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/interpreter.html#Interpreter.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>execute command with hyper functions</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="SerWise.core.interpreter.Interpreter.step_cache">
+<code class="sig-name descname"><span class="pre">step_cache</span></code><a class="headerlink" href="#SerWise.core.interpreter.Interpreter.step_cache" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>a dict to store the step</dt><dd><ul class="simple">
+<li><p>key: step name</p></li>
+<li><dl class="simple">
+<dt>value: command list</dt><dd><ul>
+<li><dl class="simple">
+<dt>command&lt;dict&gt;:</dt><dd><p>-‘command’: command name
+-‘parameters’: parameters for command
+-‘trace’: the command running trace</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="parser">
+<h2>Parser<a class="headerlink" href="#parser" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="SerWise.core.parser.Parser">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">SerWise.core.parser.</span></code><code class="sig-name descname"><span class="pre">Parser</span></code><a class="reference internal" href="../_modules/SerWise/core/parser.html#Parser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.parser.Parser" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>overview:</dt><dd><dl class="simple">
+<dt>Provides parsing functions, including</dt><dd><ul class="simple">
+<li><p>Lexical analysis</p></li>
+<li><p>Statement normalized return</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="SerWise.core.parser.Parser.parse">
+<code class="sig-name descname"><span class="pre">parse</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sentence</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/parser.html#Parser.parse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.parser.Parser.parse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parse a serwise statement and return it to the interpreter in format
+Paramters:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>sentence &lt;str&gt; : the statement need to be parsed</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>Return:</dt><dd><dl class="simple">
+<dt>a tuple:</dt><dd><ul class="simple">
+<li><p>command name</p></li>
+<li><p>parameters</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="userdatabase">
+<h2>userDatabase<a class="headerlink" href="#userdatabase" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="SerWise.core.database.userDatabase">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">SerWise.core.database.</span></code><code class="sig-name descname"><span class="pre">userDatabase</span></code><a class="reference internal" href="../_modules/SerWise/core/database.html#userDatabase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.database.userDatabase" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Used to manage user database, read and write, modify the information in it</p>
+</dd>
+<dt>Note:</dt><dd><p>Many settings of the database can be set in setting.py</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="SerWise.core.database.userDatabase.get_num">
+<code class="sig-name descname"><span class="pre">get_num</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">int</span><a class="reference internal" href="../_modules/SerWise/core/database.html#userDatabase.get_num"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.database.userDatabase.get_num" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Get the number of users in the table</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.database.userDatabase.insert_value">
+<code class="sig-name descname"><span class="pre">insert_value</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">None</span><a class="reference internal" href="../_modules/SerWise/core/database.html#userDatabase.insert_value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.database.userDatabase.insert_value" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Insert data into the user table</p>
+</dd>
+<dt>Parameters:</dt><dd><p>values: The data to be inserted requires the same format with header</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.database.userDatabase.result_save">
+<code class="sig-name descname"><span class="pre">result_save</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">table_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dict</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/core/database.html#userDatabase.result_save"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.database.userDatabase.result_save" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>overview:</dt><dd><p>According to the input table name and dictionary key, construct a new table, and store the dictionary value correspondingly in the database</p>
+</dd>
+<dt>Paramters:</dt><dd><ul class="simple">
+<li><p>table_name&lt;str&gt;: table name</p></li>
+<li><p>dict&lt;dict&gt;: the dict need to be parsed and store into database</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="SerWise.core.database.userDatabase.select_with_id">
+<code class="sig-name descname"><span class="pre">select_with_id</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">id</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">dict</span><a class="reference internal" href="../_modules/SerWise/core/database.html#userDatabase.select_with_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.core.database.userDatabase.select_with_id" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Overview:</dt><dd><p>Read user information by user id</p>
+</dd>
+<dt>Parameters:</dt><dd><p>id &lt;str&gt;: user id</p>
+</dd>
+<dt>Return:</dt><dd><p>Formatted dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API Doc" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="server.html" class="btn btn-neutral float-right" title="server" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -5,6 +5,8 @@ SerWise文档
     :maxdepth: 3
 
     quick_start
-    what_is_gobigger
-    real_time_interaction_with_game
-    space
+    语法规则
+    分支
+    更多配置
+    异常处理
+    

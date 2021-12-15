@@ -8,11 +8,8 @@ API Doc
 
 .. toctree::
     :maxdepth: 3
-
-    agents
-    balls
-    managers
-    players
-    render
+    
+    
+    core
     server
     utils

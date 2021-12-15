@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>utils &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>utils &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -24,7 +24,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> DSL
+            <a href="../index.html" class="icon icon-home"> SerWise
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -45,19 +45,10 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">API Doc</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="agents.html">agents</a></li>
-<li class="toctree-l2"><a class="reference internal" href="balls.html">balls</a></li>
-<li class="toctree-l2"><a class="reference internal" href="managers.html">managers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="players.html">players</a></li>
-<li class="toctree-l2"><a class="reference internal" href="render.html">render</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core.html">core</a></li>
 <li class="toctree-l2"><a class="reference internal" href="server.html">server</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">utils</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#border">Border</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#basecollisiondetection">BaseCollisionDetection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#exhaustivecollisiondetection">ExhaustiveCollisionDetection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#precisioncollisiondetection">PrecisionCollisionDetection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#rebuildquadtreecollisiondetection">RebuildQuadTreeCollisionDetection</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#removequadtreecollisiondetection">RemoveQuadTreeCollisionDetection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logger">logger</a></li>
 </ul>
 </li>
 </ul>
@@ -73,7 +64,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DSL</a>
+          <a href="../index.html">SerWise</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -96,23 +87,20 @@
 <h1>utils<a class="headerlink" href="#utils" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<div class="section" id="border">
-<h2>Border<a class="headerlink" href="#border" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="basecollisiondetection">
-<h2>BaseCollisionDetection<a class="headerlink" href="#basecollisiondetection" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="exhaustivecollisiondetection">
-<h2>ExhaustiveCollisionDetection<a class="headerlink" href="#exhaustivecollisiondetection" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="precisioncollisiondetection">
-<h2>PrecisionCollisionDetection<a class="headerlink" href="#precisioncollisiondetection" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="rebuildquadtreecollisiondetection">
-<h2>RebuildQuadTreeCollisionDetection<a class="headerlink" href="#rebuildquadtreecollisiondetection" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="removequadtreecollisiondetection">
-<h2>RemoveQuadTreeCollisionDetection<a class="headerlink" href="#removequadtreecollisiondetection" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="logger">
+<h2>logger<a class="headerlink" href="#logger" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="SerWise.util.logger.get_core_logger">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">SerWise.util.logger.</span></code><code class="sig-name descname"><span class="pre">get_core_logger</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/util/logger.html#get_core_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.util.logger.get_core_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to get the corresponding logger, this method will save the log file under “core_log” and won’t print it out on the console</p>
+</dd></dl>
+
+<dl class="py class">
+<dt id="SerWise.util.logger.get_user_logger">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">SerWise.util.logger.</span></code><code class="sig-name descname"><span class="pre">get_user_logger</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/SerWise/util/logger.html#get_user_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#SerWise.util.logger.get_user_logger" title="Permalink to this definition">¶</a></dt>
+<dd><p>Used to get the corresponding logger, this method will save the log file under user_log and print it out on the console</p>
+</dd></dl>
+
 </div>
 </div>
 

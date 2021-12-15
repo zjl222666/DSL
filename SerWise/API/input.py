@@ -1,4 +1,3 @@
-
 '''
 overview:
     you can define other input method here and setting in `setting.py`
@@ -29,6 +28,7 @@ def wait_input(q):
     words = input() 
     q.put(words)
 
+
 q = Queue()
 p = None
 
@@ -55,6 +55,7 @@ def clock_listen(kwargs):
     if result == "":
         print('\r 您已超过规定的输入时间    ', end="")
     return result
+
 
 listen_dict = {
     "default": keyboard,

@@ -1,0 +1,197 @@
+解释器配置
+####################
+
+Overview
+===============
+
+* 配置步骤:
+
+  1. 首先，您需要确保使用 '-e' 指令下载并安装了本程序包
+
+  2. 进入安装目录并打开 ``SerWise/setting.py``
+
+  3. 源文件内容如下所示:
+
+  .. code:: python
+
+    import logging
+
+    # setting user logging
+    user_logging_level = logging.INFO
+
+    # setting core logging level
+    core_logging_level = logging.DEBUG 
+
+    # setting process create and server quit method
+    muti_process_method = 'default'
+    '''
+    Optional:
+    - default
+    '''
+
+    # setting listen method
+    listen_method = "default"
+    '''
+    Optional:
+    - default
+    - clock
+    '''
+
+    # setting speak method
+    speak_method = 'default'
+    '''
+    Optional:
+    - default
+    '''
+
+
+    # setting analyzer
+    analyzer_chosen = 'contain'
+    '''
+    Optional:
+    - default
+    - contain
+    '''
+
+
+    # setting process start pattern
+    user_setting = 'random'  
+    '''
+    Optional:
+    - input: console input
+    - random: automatically generate
+    - None: none user information
+    '''
+
+    # setting whether to save the var_cache to sqlite
+    save_var = True
+    '''
+    Optional:
+    - True
+    - False
+    '''
+
+    # setting path of user database
+    database_path = "user.sqlite"
+    '''
+    input the database file path 
+    '''
+
+    # setting database header
+    database_header = [
+        'id',
+        'name',
+        'age',
+        'balance',
+        'phone'
+
+    ]
+
+    # setting table name to extract
+    database_table_name = 'user'
+    '''
+    input the database table name to store the user information
+    '''
+
+调试选项
+===============
+开发者可以根据自己的需要修改调试日志的输出等级 ``INFO``, ``DEBUG`` 等
+
+调试日志又分为用户日志和内核日志，如需阅读内核日志，请参考API Doc
+
+- setting.py: user_logging_level
+- setting.py: core_logging_level
+
+
+拓展包选项
+===============
+
+拓展包选项目前支持 ``listen`` ``speak`` ``branch`` 三个指令 以及多进程启动的进程唤醒方式
+
+.. note::
+  所有支持拓展包的指令参数个数均无限制，除基本解释器必须的参数外，剩余的参数将按顺序被打包成数组形式传送给拓展包使用
+
+``listen``
+
+- 参数: kwargs
+- 返回值: 用户输入的字符串
+- setting.py: listen_method
+
++----------+----------------------------------------------------------+
+| 可选包名 | 功能逻辑                                                 |
++==========+==========================================================+
+| default  | 从控制台获取用户输入，用户需输入回车方可提交             |
++----------+----------------------------------------------------------+
+| clock    | 从控制台获取用户输入，添加计时等                         |
+|          | 待功能，可通过kwargs传递等待时间，若不传递则默认等待十秒 |
++----------+----------------------------------------------------------+
+
+``speak``
+
+- 参数: output_words, kwargs -> 待输出的字符串
+- 返回值: boolean -> 表示是否输出成功
+- setting.py: speak_method
+
+
+======== ===========================
+可选包名 功能逻辑
+======== ===========================
+default  通过控制台和log文件打印输出
+======== ===========================
+
+``branch``
+
+- 参数: pattern, s, kwargs -> 待匹配的模式串，待匹配的字符串
+- 返回值: boolean -> 表示匹配是否成功
+- setting.py: branch_method
+
++----------+----------------------------------------------------------+
+| 可选包名 | 功能逻辑                                                 |
++==========+==========================================================+
+| default  | 直接判别模式串是否与待匹配串完全相等                     |
++----------+----------------------------------------------------------+
+| contain  | 若不传递参数kwargs，则判                                 |
+|          | 别模式串中是否包含待匹配串，若kwargs中包含'len'选项，此  |
+|          | 时模式串应当设置为数字，判别待匹配串长度是否与该数字相同 |
++----------+----------------------------------------------------------+
+
+
+- 多进程唤醒方式
+
+编写逻辑: server将为多进程唤醒包申请一个额外线程，并通过thread_queue进行通信
+
+每当需要唤醒一个线程，则在thread_queue中put一个字符串:"创建线程"
+
+当需要结束主程序server时，则在thread_queue中put一个字符串: "结束退出"
+
+- setting.py: muti_process_method
+
+======== ========================================
+可选包名 功能逻辑
+======== ========================================
+default  键盘输入Tab唤醒进程，键盘输入Esc退出程序
+======== ========================================
+
+
+数据库选项
+===============
+
+- setting.py: database_path
+
+- setting.py: database_table_name
+
+- setting.py: database_header
+
+
+常规选项
+===============
+- setting.py: save_var
+
+- setting.py: user_setting
+
+
+
+
+
+
+

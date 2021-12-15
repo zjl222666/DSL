@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>添加拓展包 &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="语法修改" href="%E8%AF%AD%E6%B3%95%E4%BF%AE%E6%94%B9.html" />
+    <link rel="prev" title="开发者文档" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> SerWise
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../SerWise%20doc/index.html">SerWise文档</a></li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">开发者文档</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">添加拓展包</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#listen">listen</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#speak">speak</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#analyzer-branch">analyzer(branch)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#muti-process">muti_process</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="%E8%AF%AD%E6%B3%95%E4%BF%AE%E6%94%B9.html">语法修改</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_doc/index.html">API Doc</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">SerWise</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">开发者文档</a> &raquo;</li>
+      <li>添加拓展包</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/developer/拓展包添加.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="id1">
+<h1>添加拓展包<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>Serwise解释器支持四种拓展包添加</p>
+<div class="section" id="listen">
+<h2>listen<a class="headerlink" href="#listen" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">SerWise/API/input</span></code></p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">overview:</span>
+<span class="sd">    you can define other input method here and setting in `setting.py`</span>
+
+<span class="sd">rules:</span>
+<span class="sd">    input: None</span>
+<span class="sd">    output: achieved object</span>
+<span class="sd">    note:</span>
+<span class="sd">        1. if the output isn&#39;t string, you need to make sure there isn&#39;t any compare between string and input content in your code</span>
+<span class="sd">        2. you need to make the input_method correspond to a string one by one in dict `listen_dict`</span>
+<span class="sd">setting:</span>
+<span class="sd">    you can choose your input method in `setting.py`</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">SerWise.util</span> <span class="kn">import</span> <span class="n">logger</span>
+<span class="kn">from</span> <span class="nn">SerWise.util.logger</span> <span class="kn">import</span> <span class="n">get_user_logger</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Thread</span>
+
+<span class="k">def</span> <span class="nf">keyboard</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="c1"># keyboard input</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">words</span>
+
+
+<span class="k">def</span> <span class="nf">wait_input</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+    <span class="n">words</span> <span class="o">=</span> <span class="nb">input</span><span class="p">()</span>
+    <span class="n">q</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">words</span><span class="p">)</span>
+
+
+<span class="n">q</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="kc">None</span>
+
+<span class="k">def</span> <span class="nf">clock_listen</span><span class="p">(</span><span class="n">kwargs</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">kwargs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="n">wait_time</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">kwargs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">wait_time</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">global</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">q</span><span class="o">.</span><span class="n">empty</span><span class="p">():</span> <span class="n">_</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Thread</span><span class="p">)</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">Thread</span><span class="p">):</span> <span class="n">p</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wait_input</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">q</span><span class="p">,))</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">wait_time</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">p</span><span class="o">.</span><span class="n">is_alive</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\r</span><span class="s2"> 你需要在</span><span class="si">{}</span><span class="s2">s内完成输入&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">wait_time</span> <span class="o">-</span> <span class="n">i</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">result</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r</span><span class="s1"> 您已超过规定的输入时间    &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+
+<span class="n">listen_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="n">keyboard</span><span class="p">,</span>
+    <span class="s2">&quot;clock&quot;</span><span class="p">:</span> <span class="n">clock_listen</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>添加步骤:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">SerWise/API/input</span></code> 中导入或编写拓展listen方法</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">listen_dict</span></code> 中添加拓展方法，并为其命名</p></li>
+<li><p>更新文档，解释拓展包功能</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="speak">
+<h2>speak<a class="headerlink" href="#speak" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">SerWise/API/output</span></code></p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">overview:</span>
+<span class="sd">    you can define other out method here</span>
+
+<span class="sd">rules:</span>
+<span class="sd">    input: object will be output</span>
+<span class="sd">    output: None</span>
+<span class="sd">    note:</span>
+<span class="sd">        1. you need to make the output_method correspond to a string one by one in dict `speak_dict`</span>
+<span class="sd">setting:</span>
+<span class="sd">    you can choose your output method in `setting.py`</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">SerWise.util.logger</span> <span class="kn">import</span> <span class="n">get_core_logger</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">get_core_logger</span><span class="p">(</span><span class="s1">&#39;speak_test&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">console</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">kwarg</span><span class="p">):</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+    <span class="k">return</span> <span class="kc">True</span>
+
+<span class="n">speak_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span>  <span class="n">console</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>添加步骤:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">SerWise/API/output</span></code> 中导入或编写拓展listen方法</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">speak_dict</span></code> 中添加拓展方法，并为其命名</p></li>
+<li><p>更新文档，解释拓展包功能</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="analyzer-branch">
+<h2>analyzer(branch)<a class="headerlink" href="#analyzer-branch" title="Permalink to this headline">¶</a></h2>
+<p>分析器主要用于用户输入判别，可结合现有的人工智能技术引入</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">SerWise/API/analyzer</span></code></p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">overview:</span>
+<span class="sd">    define your Analyzer here</span>
+
+<span class="sd">rules:</span>
+<span class="sd">    input:</span>
+<span class="sd">        - pattern</span>
+<span class="sd">        - s</span>
+<span class="sd">        - kwarg</span>
+<span class="sd">    output: boolean</span>
+<span class="sd">    note:</span>
+<span class="sd">        you need to make the analyzer correspond to a string one by one in dict `Analyzer_dict`:</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="kn">import</span> <span class="nn">re</span>
+
+
+<span class="k">def</span> <span class="nf">equal_analyzer</span><span class="p">(</span><span class="n">pattern</span> <span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kwarg</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">pattern</span> <span class="o">==</span> <span class="n">s</span>
+
+
+<span class="k">def</span> <span class="nf">contain_analyzer</span><span class="p">(</span><span class="n">pattern</span> <span class="p">:</span><span class="nb">str</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">kwarg</span><span class="p">):</span>
+
+    <span class="k">if</span> <span class="s2">&quot;len&quot;</span> <span class="ow">in</span> <span class="n">kwarg</span> <span class="ow">and</span> <span class="n">pattern</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">==</span> <span class="nb">int</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">pattern</span> <span class="o">==</span> <span class="s2">&quot;合法姓名&quot;</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;^[a-z]*$&quot;</span>
+        <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">s</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+    <span class="k">return</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">s</span>
+
+
+<span class="n">Analyzer_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;default&quot;</span><span class="p">:</span> <span class="n">equal_analyzer</span><span class="p">,</span>
+    <span class="s2">&quot;contain&quot;</span><span class="p">:</span> <span class="n">contain_analyzer</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>添加步骤:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">SerWise/API/analyzer</span></code> 中导入或编写拓展listen方法</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">Analyzer_dict</span></code> 中添加拓展方法，并为其命名</p></li>
+<li><p>更新文档，解释拓展包功能</p></li>
+</ol>
+</div></blockquote>
+</div>
+<div class="section" id="muti-process">
+<h2>muti_process<a class="headerlink" href="#muti-process" title="Permalink to this headline">¶</a></h2>
+<p>多进程拓展包用于管理进程启动和服务器退出触发器</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">SerWise/API/analyzer</span></code></p>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">overview:</span>
+<span class="sd">    you can define other muti_process method here</span>
+<span class="sd">    the main server will creat a thread to run your method</span>
+<span class="sd">        - once you want to raise a process, you just need to put a string &quot;创建对话&quot;  into thread_queue</span>
+<span class="sd">        - once you want to shutdown the server ,you just need to put a string &quot;结束退出&quot; into thread_queue</span>
+<span class="sd">rules:</span>
+<span class="sd">    input: None</span>
+<span class="sd">    output: None</span>
+<span class="sd">    note:</span>
+<span class="sd">        1. you need to make the muti_process methord correspond to a string one by one in dict `muti_processer_dict`</span>
+<span class="sd">setting:</span>
+<span class="sd">    you can choose your muti_process method in `setting.py`</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">pynput</span> <span class="kn">import</span> <span class="n">keyboard</span>
+<span class="kn">from</span> <span class="nn">pynput.keyboard</span> <span class="kn">import</span> <span class="n">Key</span><span class="p">,</span> <span class="n">Listener</span>
+<span class="kn">from</span> <span class="nn">SerWise.util.logger</span> <span class="kn">import</span> <span class="n">get_core_logger</span><span class="p">,</span> <span class="n">get_user_logger</span>
+<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span>
+
+<span class="n">thread_queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
+
+
+<span class="k">def</span> <span class="nf">key_board_listen</span><span class="p">():</span>
+    <span class="n">logger</span> <span class="o">=</span> <span class="n">get_core_logger</span><span class="p">(</span><span class="s2">&quot;keyboard_listen&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">on_press</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;输入</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">on_release</span><span class="p">(</span><span class="n">key</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">thread_queue</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">Key</span><span class="o">.</span><span class="n">tab</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;创建对话&quot;</span><span class="p">)</span>
+            <span class="n">thread_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;creat&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">Key</span><span class="o">.</span><span class="n">esc</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;结束退出&quot;</span><span class="p">)</span>
+            <span class="n">thread_queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;over&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">with</span> <span class="n">Listener</span><span class="p">(</span><span class="n">on_press</span><span class="o">=</span><span class="n">on_press</span><span class="p">,</span><span class="n">on_release</span><span class="o">=</span><span class="n">on_release</span><span class="p">)</span> <span class="k">as</span> <span class="n">listener</span><span class="p">:</span>
+        <span class="n">listener</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+
+
+<span class="n">muti_processer_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="n">key_board_listen</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>添加步骤:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">SerWise/API/muti_process</span></code> 中导入或编写拓展listen方法</p></li>
+<li><p>在 <code class="docutils literal notranslate"><span class="pre">muti_process_dict</span></code> 中添加拓展方法，并为其命名</p></li>
+<li><p>更新文档，解释拓展包功能</p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="开发者文档" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="%E8%AF%AD%E6%B3%95%E4%BF%AE%E6%94%B9.html" class="btn btn-neutral float-right" title="语法修改" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, computer academy of BUPT Contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

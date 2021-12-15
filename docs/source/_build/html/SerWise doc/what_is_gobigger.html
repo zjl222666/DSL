@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What is GoBigger? &mdash; DSL 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <title>What is GoBigger? &mdash; SerWise 0.1.0 documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -14,7 +14,9 @@
         <script src="../_static/doctools.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Real-time Interaction with game" href="real_time_interaction_with_game.html" />
+    <link rel="prev" title="Quick Start" href="quick_start.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -22,7 +24,7 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> DSL
+            <a href="../index.html" class="icon icon-home"> SerWise
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -35,11 +37,25 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../installation/index.html">安装教程</a></li>
 </ul>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../challenge/index.html">Challenge</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">SerWise文档</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="quick_start.html">Quick Start</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">What is GoBigger?</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#balls">Balls</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rules-of-game">Rules of Game</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="real_time_interaction_with_game.html">Real-time Interaction with game</a></li>
+<li class="toctree-l2"><a class="reference internal" href="space.html">Space</a></li>
+</ul>
+</li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../api_doc/index.html">API Doc</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../developer/index.html">开发者文档</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../core_doc/index.html">API Doc</a></li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../faq/index.html">FAQ</a></li>
@@ -51,7 +67,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">DSL</a>
+          <a href="../index.html">SerWise</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -59,6 +75,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">SerWise文档</a> &raquo;</li>
       <li>What is GoBigger?</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/SerWise doc/what_is_gobigger.rst.txt" rel="nofollow"> View page source</a>
@@ -75,7 +92,7 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>GoBigger is an <a class="reference external" href="https://agar.io/">Agar</a> like game, which is one of the most popular game all over the world. In GoBigger, users control their owned balls to collect weight in a 2-d map with border. There are many other balls in the map, such as food-balls, thorns-balls, spore-balls and other players’ balls. With the limited time, user are ranked by the weight they collect. In order to improve the antagonism of the game, users are allowed to eat other others’ balls to get more weight. So in a game, users need to grow by eating food-balls and thorns-balls, and escape from the larger balls, and eat smaller balls to gather more weight quickly.</p>
 <div class="figure align-center" id="id1">
-<a class="reference internal image-reference" href="../_images/overview.gif"><img alt="../_images/overview.gif" src="../_images/overview.gif" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/overview.gif"><img alt="SerWise doc/images/overview.gif" src="SerWise doc/images/overview.gif" style="width: 600px;" /></a>
 <p class="caption"><span class="caption-text">Players are controling player-balls in a game.</span><a class="headerlink" href="#id1" title="Permalink to this image">¶</a></p>
 </div>
 <p>For a more detailed exposition rules of the game, we will firstly introduce the balls in GoBigger.</p>
@@ -87,7 +104,7 @@
 <blockquote>
 <div><p>Food-balls are the neutral resources in the game. They will stay on where they are borned util someone comes and eats them. If a player-ball eat a food-ball, the food-ball’s size will be parsed to the player-ball. There is a maximum number of food-balls in the map. Once the number of available food-balls is not enough, the game will generate new food-balls in random positions every certain time.</p>
 <div class="figure align-center" id="id2">
-<a class="reference internal image-reference" href="../_images/eat_food.gif"><img alt="../_images/eat_food.gif" src="../_images/eat_food.gif" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/eat_food.gif"><img alt="SerWise doc/images/eat_food.gif" src="SerWise doc/images/eat_food.gif" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">A player-balls eat a food-ball.</span><a class="headerlink" href="#id2" title="Permalink to this image">¶</a></p>
 </div>
 </div></blockquote>
@@ -97,7 +114,7 @@
 <div><p>Thorns-balls are also the neutral resources in the game. Different with food-balls, they have larger size and less quantity. If a player-ball eat a thorns-ball, the thorns-ball’s size will be parsed to the player-ball. But at the same time, the player-ball will explode and will be splited into several pieces. In GoBigger, the pieces always have the same size, and they will appear evenly around the original player-ball. So be careful! If there are other player-balls larger than yours, you should pay more attention to decide whether to eat the thorns-balls.</p>
 <p>Another feature of the thorns-balls is that they can be moved by player-balls through ejecting spore-balls. If a player-ball eject spore-balls to a thorns-ball, the thorns-ball will eat the spore-balls and grow larger. Besides, it will move on the moving direction of the spore-balls. That means if a player-ball wants to force a larger player-ball to explode, it can eject spore-balls to the thorns-ball and move it to the larger player-ball.</p>
 <div class="figure align-center" id="id3">
-<a class="reference internal image-reference" href="../_images/on_thorns.gif"><img alt="../_images/on_thorns.gif" src="../_images/on_thorns.gif" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/on_thorns.gif"><img alt="SerWise doc/images/on_thorns.gif" src="SerWise doc/images/on_thorns.gif" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">A player-balls eat a thorns-ball and explode.</span><a class="headerlink" href="#id3" title="Permalink to this image">¶</a></p>
 </div>
 </div></blockquote>
@@ -106,7 +123,7 @@
 <blockquote>
 <div><p>Spore-balls are ejected by the player-balls. They will stay on the map and can be eaten by any other player-balls. Spore-balls can not move or eat others.</p>
 <div class="figure align-center" id="id4">
-<a class="reference internal image-reference" href="../_images/eject.gif"><img alt="../_images/eject.gif" src="../_images/eject.gif" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/eject.gif"><img alt="SerWise doc/images/eject.gif" src="SerWise doc/images/eject.gif" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">A player-balls eject some spore-balls.</span><a class="headerlink" href="#id4" title="Permalink to this image">¶</a></p>
 </div>
 </div></blockquote>
@@ -115,7 +132,7 @@
 <blockquote>
 <div><p>Player-balls are the balls you can control in the game. You can change its moving direction at any time if you want. In addition, it can eat other balls smaller than itself by covering others’ center. Once a player-ball eat other balls, its size will raise and it radius will increase accordingly. A player-ball has there skills:</p>
 <div class="figure align-center" id="id5">
-<a class="reference internal image-reference" href="../_images/eat_player.gif"><img alt="../_images/eat_player.gif" src="../_images/eat_player.gif" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/eat_player.gif"><img alt="SerWise doc/images/eat_player.gif" src="SerWise doc/images/eat_player.gif" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">A player-balls eat other player-balls.</span><a class="headerlink" href="#id5" title="Permalink to this image">¶</a></p>
 </div>
 <ul>
@@ -123,7 +140,7 @@
 <blockquote>
 <div><p>Ejecting a spore-ball can help a player-ball decrease its size and make it move faster. When a player-ball ejects, the new spore-ball must appear on the player-ball’s moving direction with a high speed and quickly slow down.</p>
 <div class="figure align-center" id="id6">
-<a class="reference internal image-reference" href="../_images/eject_to_thorns.gif"><img alt="../_images/eject_to_thorns.gif" src="../_images/eject_to_thorns.gif" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/eject_to_thorns.gif"><img alt="SerWise doc/images/eject_to_thorns.gif" src="SerWise doc/images/eject_to_thorns.gif" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">A player-ball eject to a thorns-ball and move it.</span><a class="headerlink" href="#id6" title="Permalink to this image">¶</a></p>
 </div>
 </div></blockquote>
@@ -132,7 +149,7 @@
 <blockquote>
 <div><p>Spliting helps a player-ball to split itself in two pieces. The two pieces has the same size. Remember that all pieces will be merged in certain time. If you want to move faster, you can split and turn your balls into smaller size in order to get higher speed limit.</p>
 <div class="figure align-center" id="id7">
-<a class="reference internal image-reference" href="../_images/split.gif"><img alt="../_images/split.gif" src="../_images/split.gif" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/split.gif"><img alt="SerWise doc/images/split.gif" src="SerWise doc/images/split.gif" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">A player-ball splits into two player-balls.</span><a class="headerlink" href="#id7" title="Permalink to this image">¶</a></p>
 </div>
 </div></blockquote>
@@ -141,7 +158,7 @@
 <blockquote>
 <div><p>Stopping is a useful skill when a player wants all his player-balls to gather together. When you have numbers of cloned pieces, you can stop all your balls and soonly find them gather in a slow speed. If you have only one player-ball, you can call stop skill and make your player-ball still in place.</p>
 <div class="figure align-center" id="id8">
-<a class="reference internal image-reference" href="../_images/split_merge.gif"><img alt="../_images/split_merge.gif" src="../_images/split_merge.gif" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="SerWise doc/images/split_merge.gif"><img alt="SerWise doc/images/split_merge.gif" src="SerWise doc/images/split_merge.gif" style="width: 300px;" /></a>
 <p class="caption"><span class="caption-text">A player stop and finally merge all balls together.</span><a class="headerlink" href="#id8" title="Permalink to this image">¶</a></p>
 </div>
 </div></blockquote>
@@ -166,7 +183,10 @@
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="quick_start.html" class="btn btn-neutral float-left" title="Quick Start" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="real_time_interaction_with_game.html" class="btn btn-neutral float-right" title="Real-time Interaction with game" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

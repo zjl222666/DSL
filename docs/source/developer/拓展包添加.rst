@@ -1,0 +1,258 @@
+添加拓展包
+######################
+
+Serwise解释器支持四种拓展包添加
+
+listen
+===========================
+
+ ``SerWise/API/input``
+
+.. code:: python
+
+    '''
+    overview:
+        you can define other input method here and setting in `setting.py`
+
+    rules:
+        input: None
+        output: achieved object 
+        note: 
+            1. if the output isn't string, you need to make sure there isn't any compare between string and input content in your code
+            2. you need to make the input_method correspond to a string one by one in dict `listen_dict`
+    setting:
+        you can choose your input method in `setting.py`
+
+    '''
+    from SerWise.util import logger
+    from SerWise.util.logger import get_user_logger
+    import time
+    from queue import Queue
+    from threading import Thread
+
+    def keyboard(kwargs):
+        # keyboard input
+        words = input() 
+        return words
+
+
+    def wait_input(q):
+        words = input() 
+        q.put(words)
+
+
+    q = Queue()
+    p = None
+
+    def clock_listen(kwargs):
+
+        if len(kwargs) == 1 and kwargs[0].isdigit():
+            wait_time = int(kwargs[0])
+        else:
+            wait_time = 10
+        global q, p
+        while not q.empty(): _ = q.get()
+        if not isinstance(p, Thread) or not p.is_alive():
+            if isinstance(p, Thread): p.join()
+            p = Thread(target=wait_input, args=(q,))
+            p.start()
+        result = ""
+        for i in range(wait_time):
+            if not p.is_alive():
+                result = q.get()
+                break
+            else:
+                print("\r 你需要在{}s内完成输入".format(wait_time - i), end='')
+            time.sleep(1)
+        if result == "":
+            print('\r 您已超过规定的输入时间    ', end="")
+        return result
+
+
+    listen_dict = {
+        "default": keyboard,
+        "clock": clock_listen
+    }
+
+
+添加步骤:
+
+    1. 在 ``SerWise/API/input`` 中导入或编写拓展listen方法
+
+    2. 在 ``listen_dict`` 中添加拓展方法，并为其命名
+
+    3. 更新文档，解释拓展包功能
+
+
+speak
+===============
+
+ ``SerWise/API/output``
+
+.. code:: python
+
+
+    '''
+    overview:
+        you can define other out method here
+
+    rules:
+        input: object will be output
+        output: None
+        note: 
+            1. you need to make the output_method correspond to a string one by one in dict `speak_dict`
+    setting:
+        you can choose your output method in `setting.py`
+
+    '''
+    from SerWise.util.logger import get_core_logger
+
+    logger = get_core_logger('speak_test')
+
+    def console(s, kwarg):
+        logger.debug(s)
+        return True
+
+    speak_dict = {
+        "default":  console
+    }
+
+
+添加步骤:
+
+    1. 在 ``SerWise/API/output`` 中导入或编写拓展listen方法
+
+    2. 在 ``speak_dict`` 中添加拓展方法，并为其命名
+
+    3. 更新文档，解释拓展包功能
+
+
+analyzer(branch)
+=========================
+
+分析器主要用于用户输入判别，可结合现有的人工智能技术引入
+
+ ``SerWise/API/analyzer``
+
+.. code:: python
+
+    '''
+    overview:
+        define your Analyzer here
+
+    rules: 
+        input: 
+            - pattern
+            - s
+            - kwarg
+        output: boolean
+        note:    
+            you need to make the analyzer correspond to a string one by one in dict `Analyzer_dict`:
+    '''
+    import re
+
+
+    def equal_analyzer(pattern : str, s: str, kwarg):
+        return pattern == s
+
+
+    def contain_analyzer(pattern :str, s: str, kwarg):
+        
+        if "len" in kwarg and pattern.isdigit():
+            return len(s) == int(pattern)
+        if pattern == "合法姓名":
+            p = r"^[a-z]*$"
+            if re.match(p, s):
+                return True
+            else:
+                return False
+        return pattern in s
+
+        
+    Analyzer_dict = {
+        "default": equal_analyzer,
+        "contain": contain_analyzer
+    }
+
+
+
+添加步骤:
+
+    1. 在 ``SerWise/API/analyzer`` 中导入或编写拓展listen方法
+
+    2. 在 ``Analyzer_dict`` 中添加拓展方法，并为其命名
+
+    3. 更新文档，解释拓展包功能
+
+
+muti_process
+=========================
+
+多进程拓展包用于管理进程启动和服务器退出触发器
+
+ ``SerWise/API/analyzer``
+
+.. code:: python
+
+    '''
+    overview:
+        you can define other muti_process method here
+        the main server will creat a thread to run your method
+            - once you want to raise a process, you just need to put a string "创建对话"  into thread_queue
+            - once you want to shutdown the server ,you just need to put a string "结束退出" into thread_queue
+    rules:
+        input: None
+        output: None
+        note: 
+            1. you need to make the muti_process methord correspond to a string one by one in dict `muti_processer_dict`
+    setting:
+        you can choose your muti_process method in `setting.py`
+    '''
+
+    from pynput import keyboard
+    from pynput.keyboard import Key, Listener
+    from SerWise.util.logger import get_core_logger, get_user_logger
+    from queue import Queue
+
+    thread_queue = Queue()
+
+
+
+    def key_board_listen():
+        logger = get_core_logger("keyboard_listen")
+        def on_press(key):
+            logger.info(f"输入{key}")
+        def on_release(key):
+            global thread_queue
+            if key == Key.tab:
+                logger.info(f"创建对话")
+                thread_queue.put("creat")
+            if key == Key.esc:
+                logger.info(f"结束退出")
+                thread_queue.put("over")
+                return False
+
+        with Listener(on_press=on_press,on_release=on_release) as listener:
+            listener.join()
+
+
+    muti_processer_dict = {
+        'default': key_board_listen
+    }
+
+
+添加步骤:
+
+    1. 在 ``SerWise/API/muti_process`` 中导入或编写拓展listen方法
+
+    2. 在 ``muti_process_dict`` 中添加拓展方法，并为其命名
+
+    3. 更新文档，解释拓展包功能
+
+
+
+
+
+
+
+

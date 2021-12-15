@@ -3,7 +3,7 @@ import sys
 sys.path.insert(0, os.path.abspath('../..'))
 
 
-project = 'DSL'
+project = 'SerWise'
 copyright = '2021, computer academy of BUPT Contributors'
 author = '2toinf_BUPT'
 
@@ -91,7 +91,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ---------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'DSLdoc'
+htmlhelp_basename = 'SerWise doc'
 
 # -- Options for LaTeX output ------------------------------------------------
 
@@ -117,7 +117,7 @@ latex_elements = {
 
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
-man_pages = [(master_doc, 'gobigger', 'gobigger Documentation', [author], 1)]
+man_pages = [(master_doc, 'SerWise', 'SerWise Documentation', [author], 1)]
 
 # -- Options for Texinfo output ----------------------------------------------
 
@@ -126,7 +126,7 @@ man_pages = [(master_doc, 'gobigger', 'gobigger Documentation', [author], 1)]
 #  dir menu entry, description, category)
 texinfo_documents = [
     (
-        master_doc, 'gobigger', 'gobigger Documentation', author, 'gobigger', 'One line description of project.',
+        master_doc, 'SerWise', 'SerWise Documentation', author, 'SerWise', 'One line description of project.',
         'Miscellaneous'
     ),
 ]

@@ -1,0 +1,135 @@
+分支
+======
+
+分支逻辑是自动回复脚本的核心，serWise提供了强大的分支逻辑设计功能
+
+模块化脚本编写--step
+---------------------
+
+serWise中没有代码块(block)的概念，与之相对的serWise提供step分支模块化编写
+
+编写逻辑如下:
+
+.. code:: c++
+
+    step: step_name
+        ...... // 内部代码设计
+    stepover
+
+
+**step指令**: ``step: step_name`` 声明step分支的开始，需要一个参数为分支名，命名规则为仅包含字母即下划线
+
+**stepover指令**: ``stepover`` 声明step分支的结束，不需要参数
+
+.. note:: 
+
+    1. step模块编写无缩进要求，根据step和stepover指令分隔，注意step和stepover指令必须 **成对出现**
+    2. serWise不支持step模块嵌套编写:
+
+        .. code:: c++
+
+            step: step1
+                step: step2
+                stepover
+            stepover 
+
+        如上写法将会触发语法错误
+
+
+    3. 在step模块中编写的语句不会马上执行，而需要等分支的调用/跳转
+
+无条件分支跳转 -- goto
+-------------------------------------------------------
+
+**goto指令**: ``goto: step_name`` 该指令将无条件跳转到目标step模块中
+
+
+.. code-block:: c++
+
+    step: welcome
+        set: $welcome, " ，欢迎使用SerWise"
+        speak: "您好，请告诉我您的姓名"
+    stepover
+
+    step: get_name
+        listen: $name
+    stepover
+
+    goto: welcome
+    goto: get_name
+    speak: $name + $welcome
+
+上述例子将按顺序执行welcome和get_name中的语句，最后返回主程序中
+
+
+判别式分支切换 -- switch,branch
+-------------------------------------------------
+
+**switch指令**: ``switch: $var`` 该指令需要一个参数，即指定参与判别的标识符
+
+**branch指令**: ``branch: string, step_name`` 该指令需要两个参数，第一个参数为标识符需要匹配的对象，第二个参数为目标分支名，当指定的标识符与匹配对象匹配时，将会直接将切换当前分支到目标分支
+
+**branch指令需要紧跟在switch指令或上一个branch指令后出现**
+
+.. code-block:: c++
+
+    step: male
+        speak: "你好，先生"
+    stepover
+
+    step: female
+        speak: "你好，女士"
+    stepover
+
+    step: switch_gender
+        listen: $gender
+        swicth: $gender
+            branch: "male", male
+            branch: "female", female
+    stepover
+
+    goto: switch_gender
+
+
+
+利用switch-branch语句，可以很容易地编写出如上所示的判别逻辑，根据用户输入的性别对应给与回复
+
+.. note::
+
+    goto指令和branch指令在逻辑上有本质不同，goto是跳转，即执行完goto指令后，会继续执行当前分支的剩余内容，而branch是切换，会直接切换到目标分支，不会执行当前分支（包括主程序）的剩余内容
+
+    **因此不建议在主程序中使用branch切换分支语句**
+
+文件导入执行 -- import
+----------------------------
+
+**import指令**: ``import: file_path`` 该指令将读取目标文件并执行目标文件中的serWise语句
+
+.. note::
+    1. serWise的引入规则与python类似，import语句可以在任意位置添加，除了添加目标文件的step模块外， **会直接执行目标文件的主程序内容**
+    2. **serWise的step模块和字符串标识符值全局共享**
+
+``example``:
+    - ``file1.svl``
+       
+        .. code:: c++
+
+           set: $welcome, "您好,请告诉我您的名字"
+
+    - ``file2.svl``
+  
+        .. code:: c++
+
+            step: get_name
+                import: file1.svl
+                speak: $welcome
+                listen: $name
+            stepover
+    - ``main.svl``
+
+        .. code:: c++
+
+            import: file2.svl
+            goto: get_name
+
+    以上是一个简单的文件导入示例
